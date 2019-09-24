@@ -1,82 +1,105 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Button, Navbar, FormControl, Form, Nav} from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, ModalFooter } from "react-bootstrap";
 
-import Home from './page/Home'
+import Home from "./page/Home";
+import SignUp from "./page/SignUp"
 
 function Events() {
-  return <div> Events </div>
+  return <div> Events </div>;
 }
 
 function Studio() {
-  return <div> Studio </div>
+  return <div> Studio </div>;
 }
 
 function Workshop() {
-  return <div> Workshop </div>
+  return <div> Workshop </div>;
 }
 
 function Courses() {
-  return <div> Courses </div>
+  return <div> Courses </div>;
 }
 
 function LearningPaths() {
-  return <div> Learning Paths </div>
+  return <div> Learning Paths </div>;
 }
 
 function Login() {
-  return <div> Login </div>
+  return <div> Login </div>;
 }
 
-function SignUp() {
-  return <div> Sign Up </div>
-}
+
 
 function About() {
-  return <div> ABOUT</div>
+  return <div> ABOUT</div>;
 }
 
 function App() {
   return (
     <div className="App">
       <Router>
-          <Navbar bg="light" variant="light">
-          <Navbar.Brand to="/">ART NOTE</Navbar.Brand>
-          <Nav className="mr-auto">
-                <Link class ='btn' to="/">Home</Link>
-                <Link class ='btn' to="/events/">Events</Link>
-                <Link class ='btn' to="/studio/">Studio</Link>
-                <Link class ='btn' to="/workshop/">WorkShop</Link>
-                <Link class ='btn' to="/courses/">Courses</Link>
-                <Link class ='btn' to="/learningpaths/">Learning Paths</Link>
-                <Link class ='btn' to="/about/">About</Link>
-          </Nav>
-          <Form inline>
-            {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-primary">Search</Button> */}
-            <Link class ='btn' to="/login">Login</Link>
-            <Link class ='btn' to="/register">Sign Up</Link>
-          </Form>
-        </Navbar>
+          <Navbar bg="light" expand="lg">
+              <Navbar.Brand to="/">ART NOTE</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+                <Link class="nav-link" to="/">
+                    Home
+                  </Link>
+                  <Link class="nav-link" to="/events/">
+                    Events
+                  </Link>
+                  <Link class="nav-link" to="/studio/">
+                    Studio
+                  </Link>
+                  <Link class="nav-link" to="/workshop/">
+                    WorkShop
+                  </Link>
+                  <Link class="nav-link" to="/courses/">
+                    Courses
+                  </Link>
+                  <Link class="nav-link" to="/learningpaths/">
+                    Learning Paths
+                  </Link>
+                  <Link class="nav-link" to="/about/">
+                    About
+                  </Link>
+                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+              <Nav className="mr-0">
+                <Link class="nav-link" to="/login">
+                    Login
+                  </Link>
+                  <Link class="nav-link" to="/register">
+                    Sign Up
+                  </Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
 
-        <div className='mag-top'>
-        <Route path="/" exact component={Home} />
-        <Route path="/events/" exact component={Events} />
-        <Route path="/studio/" exact component={Studio} />
-        <Route path="/workshop/" component={Workshop} />
-        <Route path="/courses/" component={Courses} />
-        <Route path="/learningpaths/" component={LearningPaths} />
-        <Route path="/login/" component={Login} />
-        <Route path="/register/" component={SignUp} />
-        <Route path="/about/" component={About} />
+        <div className="mag-top">
+          <Route path="/" exact component={Home} />
+          <Route path="/events/" exact component={Events} />
+          <Route path="/studio/" exact component={Studio} />
+          <Route path="/workshop/" component={Workshop} />
+          <Route path="/courses/" component={Courses} />
+          <Route path="/learningpaths/" component={LearningPaths} />
+          <Route path="/login/" component={Login} />
+          <Route path="/register/" component={SignUp} />
+          <Route path="/about/" component={About} />
         </div>
 
-        <div className="footer">
-            pasfndvdvjdnvdfß
-        </div>
-
+        <ModalFooter className="footer">pasfndvdvjdnvdfß</ModalFooter>
       </Router>
     </div>
   );
