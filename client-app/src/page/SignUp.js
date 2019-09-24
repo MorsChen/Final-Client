@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Col, InputGroup, Button, Row } from "react-bootstrap";
+import { Form, Col, InputGroup, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function SignUp() {
@@ -26,9 +26,11 @@ function SignUp() {
                             required
                             type="text"
                             placeholder="First name"
-                            defaultValue="First name"
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">
+                            Please insert you first name.
+                            </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label>Last name</Form.Label>
@@ -36,9 +38,11 @@ function SignUp() {
                             required
                             type="text"
                             placeholder="Last name"
-                            defaultValue="Last name"
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">
+                            Please insert you last name.
+                            </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group as={Col} md="4" controlId="validationCustomUsername">
                         <Form.Label>Username</Form.Label>
@@ -57,23 +61,41 @@ function SignUp() {
                             </Form.Control.Feedback>
                         </InputGroup>
                         </Form.Group>
-                        <Form.Group as={Row} controlId="formHorizontalEmail">
-                            <Form.Label column sm={4}>
-                            Email
-                            </Form.Label>
-                            <Col sm={10}>
-                            <Form.Control type="email" placeholder="Email" />
-                            </Col>
+                        <Form.Group as={Col} md="4" controlId="formHorizontalEmail">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control 
+                            required
+                            type="email" 
+                            placeholder="Email" />
+                        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">
+                            Please input your email.
+                            </Form.Control.Feedback>
                         </Form.Group>
 
-                        <Form.Group as={Row} controlId="formHorizontalPassword">
-                            <Form.Label column sm={4}>
-                            Password
-                            </Form.Label>
-                            <Col sm={10}>
-                            <Form.Control type="password" placeholder="Password" />
-                            </Col>
+                        <Form.Group as={Col} md="4" controlId="formHorizontalPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control 
+                            required 
+                            type="password" 
+                            placeholder="Password" />
+                        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">
+                            Please input password.
+                            </Form.Control.Feedback>
                         </Form.Group>
+                        <Form.Group as={Col} md="4" controlId="formHorizontalPassword">
+                            <Form.Label>Re-Password</Form.Label>
+                            <Form.Control 
+                            required 
+                            type="password" 
+                            placeholder="Password" />
+                        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">
+                            Please input password.
+                            </Form.Control.Feedback>
+                        </Form.Group>
+
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col} md="6" controlId="validationCustom03">

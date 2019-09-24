@@ -6,7 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavDropdown, ModalFooter } from "react-bootstrap";
 
 import Home from "./page/Home";
-import SignUp from "./page/SignUp"
+import SignUp from "./page/SignUp";
+import Login from "./page/Login";
 
 function Events() {
   return <div> Events </div>;
@@ -27,12 +28,6 @@ function Courses() {
 function LearningPaths() {
   return <div> Learning Paths </div>;
 }
-
-function Login() {
-  return <div> Login </div>;
-}
-
-
 
 function About() {
   return <div> ABOUT</div>;
