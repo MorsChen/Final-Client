@@ -50,6 +50,8 @@ function Login() {
                         />
                     </Form.Group>
                     <Button type="submit">Sign in</Button>
+
+                    <Button onClick={()=>window.location.replace("https://127.0.0.1:5000/login/facebook")}>Sign in with FaceBook</Button>
                 </Form>
             </div>
 

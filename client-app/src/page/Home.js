@@ -97,7 +97,7 @@ export default class Hone extends Component {
           </Row>
         </Container>
       
-        {/*
+      
         <Container>
           <Row className="card-tab justify-content-md-center">
             <div xs lg="2" class="card1 col m-2">
@@ -136,7 +136,7 @@ export default class Hone extends Component {
             </div>
           </Row>
         </Container>
-        */}
+      
       
         <div className="test-div row">
           <div>
