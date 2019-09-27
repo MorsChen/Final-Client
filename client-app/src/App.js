@@ -1,80 +1,71 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Navbar, Nav} from "react-bootstrap";
+
 
 import Home from "./page/Home";
 import SignUp from "./page/SignUp";
 import Login from "./page/Login";
+import Logout from "./page/Logout";
+import NavBar from "./static/NavBar";
 
+const URL = `https://127.0.0.1:5000/`
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    const existingToken = sessionStorage.getItem('token');
+    const accessToken = (window.location.search.split("=")[0]==="?api_key") ? window.location.search.split("=")[1] : null;
+    
+    if (!accessToken && !existingToken){
+        window.location.replace(`localhost:3000/`)
+    };
 
-function App() {
-  return (
-    <div className="App">
-      <Router>
-          <Navbar bg="light" expand="lg">
-          <Link class="navbar-brand" to="/">ART NOTE</Link>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
-                <Link class="nav-link" to="/">
-                    Home
-                  </Link>
-                  <Link class="nav-link" to="/events/">
-                    Events
-                  </Link>
-                  <Link class="nav-link" to="/studio/">
-                    Studio
-                  </Link>
-                  <Link class="nav-link" to="/workshop/">
-                    WorkShop
-                  </Link>
-                  <Link class="nav-link" to="/courses/">
-                    Courses
-                  </Link>
-                  {/* <Link class="nav-link" to="/learningpaths/">
-                    Learning Paths
-                  </Link> */}
-                  <Link class="nav-link" to="/about/">
-                    About
-                  </Link>
-                {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                </NavDropdown> */}
-              </Nav>
-              <Nav className="mr-0">
-                <Link class="nav-link" to="/login">
-                    Login
-                  </Link>
-                  <Link class="nav-link" to="/register">
-                    Sign Up
-                  </Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
+    if (accessToken) {
+        sessionStorage.setItem('token', accessToken);
+    };
+    
+    this.state = {
+      events: [],
+      blogs: [],
+      users: [],
+      profiles: [],
+      comments: [],
+      news: [],
+      token: existingToken || accessToken
+    }
+  }
+  
 
-        <div className="mag-top">
-          <Route path="/" exact component={Home} />
-          <Route path="/events/" exact component={Events} />
-          <Route path="/studio/" exact component={Studio} />
-          <Route path="/workshop/" component={Workshop} />
-          <Route path="/courses/" component={Courses} />
-          {/* <Route path="/learningpaths/" component={LearningPaths} /> */}
-          <Route path="/login/" component={Login} />
-          <Route path="/register/" component={SignUp} />
-          <Route path="/about/" component={About} />
-        </div>
-
-        <div className="modal-footer">Mors Chen</div>
-      </Router>
-    </div>
-  );
+  render() {
+    console.log('check state', this.state)
+    console.log('check token login', this.state.token)
+    return (
+      <div className="App">
+        <Router>
+            <NavBar state = {this.state} />
+            
+  
+          <div className="mag-top">
+            <Route path="/" exact component={Home}/>
+            <Route path="/events/" exact component={Events} />
+            <Route path="/studio/" exact component={Studio} />
+            <Route path="/workshop/" component={Workshop} />
+            <Route path="/courses/" component={Courses} />
+            {/* <Route path="/learningpaths/" component={LearningPaths} /> */}
+            <Route path="/login/" component={Login} />
+            <Route path="/logout/" component= { (props) => <Logout {...props} state = {this.state} />}/>
+            <Route path="/register/" component={SignUp} />
+            <Route path="/about/" component={About} />
+          </div>
+  
+          <div className="modal-footer">Mors Chen</div>
+        </Router>
+      </div>
+    );
+  }
+ 
 }
 
 function Events() {
@@ -101,5 +92,10 @@ function About() {
   return <div className="FullContent"> ABOUT</div>;
 }
 
+// function Logout () {
+//   return window.location.replace(`${URL}logout`)
+// }
 
-export default App;
+
+
+
