@@ -36,12 +36,8 @@
   z-index: 1;
   }
 
-.footer {
-  background-color: #692a2a65;
-  
-  height: 50px;
-  width: 100%;
-  z-index: 1;
+.modal-footer {
+  background-color: #607a8a65;
 }
 
 .mag-top {
@@ -92,12 +88,11 @@
 .FullContent {
   display: flex;
   width: 100vw;
-  height: 100vh;
+  height: 88.5vh;
   text-align: center;
   align-items: center;
   flex-direction: column;
   margin-top: 2rem;
-  /* justify-content: center; */
 }
 
 .form-content {
@@ -155,7 +150,7 @@
   transform: translatex(12px);
 }
 
-h3{
+.text-h3-card {
   font-size:25px;
   font-family: 'Abel', sans-serif;
   color:rgb(255,255,255);

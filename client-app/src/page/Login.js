@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Col, InputGroup, Button } from "react-bootstrap";
+import { Form, Col, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Login() {
@@ -17,7 +17,7 @@ function Login() {
 
         return (
             <div className="FullContent">
-                <div><h1>Login</h1></div>
+                <div><h3>Login</h3></div>
                 <Form className="form-content" noValidate validated={validated} onSubmit={handleSubmit}>
                     <Form.Row>
                         <Form.Group as={Col} md="6" controlId="formHorizontalEmail">

@@ -17,7 +17,7 @@ function SignUp() {
 
         return (
             <div className="FullContent">
-                <div><h1>Sign Up</h1></div>
+                <div><h3>Sign Up</h3></div>
                 <Form className="form-content" noValidate validated={validated} onSubmit={handleSubmit}>
                     <Form.Row>
                         <Form.Group as={Col} md="4" controlId="validationCustom01">

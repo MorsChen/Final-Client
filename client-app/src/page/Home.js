@@ -15,7 +15,7 @@ export default class Hone extends Component {
             />
             <Carousel.Caption>
               <h1>HOME</h1>
-              <h3>First slide label</h3>
+              <h3 className="text-h3-card">First slide label</h3>
               <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </Carousel.Caption>
           </Carousel.Item>
@@ -27,7 +27,7 @@ export default class Hone extends Component {
             />
             <Carousel.Caption>
               <h1>HOME</h1>
-              <h3>Second slide label</h3>
+              <h3 className="text-h3-card">Second slide label</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </Carousel.Caption>
           </Carousel.Item>
@@ -40,7 +40,7 @@ export default class Hone extends Component {
       
             <Carousel.Caption>
               <h1>HOME</h1>
-              <h3>Third slide label</h3>
+              <h3 className="text-h3-card">Third slide label</h3>
               <p>
                 Praesent commodo cursus magna, vel scelerisque nisl consectetur.
               </p>
@@ -102,7 +102,7 @@ export default class Hone extends Component {
           <Row className="card-tab justify-content-md-center">
             <div xs lg="2" class="card1 col m-2">
               <img src="http://www.pngmart.com/files/5/Pyramids-PNG-HD.png" alt="" />
-              <h3>Pyramids</h3>
+              <h3 className="text-h3-card">Pyramids</h3>
               <p className="card-font">
                 The Egyptian pyramids are ancient pyramid-shaped masonry structures
                 located in Egypt. As of November 2008, sources cite either 118 or 138
@@ -115,7 +115,7 @@ export default class Hone extends Component {
                 src="https://wallazee.global.ssl.fastly.net/images/dynamic/items/383-1024.png"
                 alt="Eiffel Tower"
               />
-              <h3>Statue of Liberty</h3>
+              <h3 className="text-h3-card">Statue of Liberty</h3>
               <p className="card-font">
                 The Statue of Liberty is a colossal neoclassical sculpture on Liberty
                 Island in New York Harbor in New York City, in the United States.
@@ -127,7 +127,7 @@ export default class Hone extends Component {
                 src="http://pluspng.com/img-png/download-taj-mahal-png-images-transparent-gallery-advertisement-1185.png"
                 alt=""
               />
-              <h3>Taj Mahal</h3>
+              <h3 className="text-h3-card">Taj Mahal</h3>
               <p className="card-font">
                 The Taj Mahal is an ivory-white marble mausoleum on the south bank of
                 the Yamuna river in the Indian city of Agra. It was commissioned in
