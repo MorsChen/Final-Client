@@ -52,7 +52,16 @@ export default class Signup extends Component {
                 "Content-Type": "application/json"
             })
             });
-            console.log(response)
+            const data = await response.json()
+            console.log("check resp from login",data)
+            if (data.status === 200) {
+                localStorage.setItem('token', data.token)
+                this.setState({
+                    user: data.user,
+                })
+                window.location.replace(`http://localhost:3000/`);}
+            else return alert('something wrong')
+            
             
         }
         };
@@ -62,7 +71,7 @@ export default class Signup extends Component {
         this.setState({
             [name]: value
         });
-        return window.location.replace(`http://192.168.0.111:3000/`)
+        
     };
     handleDate = date => {
         this.setState({

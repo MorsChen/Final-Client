@@ -9,6 +9,7 @@ export default class Login extends Component {
             isSignin: false,
             email: "",
             password: "",
+            user: {},
         };
       }
 
@@ -33,8 +34,16 @@ export default class Login extends Component {
                 "Content-Type": "application/json"
             })
         });
-        console.log("check resp from login",response.status)
-            return ("check resp from login",response.status)
+        const data = await response.json()
+        console.log("check resp from login",data)
+        if (data.status === 200) {
+            localStorage.setItem('token', data.token)
+            this.setState({
+                user: data.user,
+            })
+            window.location.replace(`http://localhost:3000/`);}
+        else return alert('something wrong')
+        
 
         };
     handleChange = e => {

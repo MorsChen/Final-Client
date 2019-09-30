@@ -27,7 +27,7 @@ export default class Logout extends React.Component {
         const status = await response.json()
         console.log('STATUS',status.status)
         if (status.status === 200) {
-            sessionStorage.removeItem('token')
+            localStorage.removeItem('token')
             this.setState({ token: null })
             window.location.replace('localhost:3000/')
         } else {

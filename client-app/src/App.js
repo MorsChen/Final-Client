@@ -16,7 +16,7 @@ import NavBar from "./static/NavBar";
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    const existingToken = sessionStorage.getItem('token');
+    const existingToken = localStorage.getItem('token');
     const accessToken = (window.location.search.split("=")[0]==="?api_key") ? window.location.search.split("=")[1] : null;
     
     if (!accessToken && !existingToken){
@@ -24,7 +24,7 @@ export default class App extends React.Component {
     };
 
     if (accessToken) {
-        sessionStorage.setItem('token', accessToken);
+        localStorage.setItem('token', accessToken);
     };
     
     this.state = {
@@ -57,7 +57,7 @@ export default class App extends React.Component {
             <Route path="/courses/" component={Courses} />
             {/* <Route path="/learningpaths/" component={LearningPaths} /> */}
             <Route path="/login/" component={Login} />
-            <Route path="/logout/" component= { (props) => <Logout {...props} state = {this.state} />}/>
+            <Route path="/logout/" component= { (props) => <Logout {...props} token = {this.state.token} />}/>
             <Route path="/register/" component={SignUp} />
             <Route path="/about/" component={About} />
           </div>
