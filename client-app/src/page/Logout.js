@@ -21,18 +21,20 @@ export default class Logout extends React.Component {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': `Token ${this.state.state.token}`
+            'Authorization': `Token ${this.state.token}`
         }
         })
         const status = await response.json()
         console.log('STATUS',status.status)
         if (status.status === 200) {
-            localStorage.removeItem('token')
+            localStorage.clear('token')
             this.setState({ token: null })
-            window.location.replace('localhost:3000/')
-        } else {
-            alert('Error: ', status)
-        }
+            window.location.replace(`http://localhost:3000/`);}
+        else return alert('something wrong')
+       
+    }
+    sendToken=(token)=>{
+        this.props.getToken({token: token})
     }
 
     render (){

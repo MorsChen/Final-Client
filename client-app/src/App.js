@@ -38,6 +38,9 @@ export default class App extends React.Component {
     }
   }
   
+  getToken = (token) => {
+    this.setState({token : token})
+  }
 
   render() {
     console.log('check state', this.state)
@@ -53,10 +56,10 @@ export default class App extends React.Component {
             <Route path="/events/" exact component={Events} />
             <Route path="/studio/" exact component={Studio} />
             <Route path="/workshop/" component={Workshop} />
-            <Route path="/profile/" exact component={Profile} />
+            <Route path="/profile/" exact component={ (props) => <Profile {...props} token = {this.state.token} />} />
             <Route path="/courses/" component={Courses} />
             {/* <Route path="/learningpaths/" component={LearningPaths} /> */}
-            <Route path="/login/" component={Login} />
+            <Route path="/login/" component={ (props) => <Login {...props} getToken = {this.getToken}/>}/>
             <Route path="/logout/" component= { (props) => <Logout {...props} token = {this.state.token} />}/>
             <Route path="/register/" component={SignUp} />
             <Route path="/about/" component={About} />

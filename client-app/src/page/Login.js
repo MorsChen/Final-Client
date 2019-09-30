@@ -37,15 +37,20 @@ export default class Login extends Component {
         const data = await response.json()
         console.log("check resp from login",data)
         if (data.status === 200) {
+            this.sendToken(data.token)
             localStorage.setItem('token', data.token)
             this.setState({
                 user: data.user,
             })
             window.location.replace(`http://localhost:3000/`);}
         else return alert('something wrong')
-        
-
         };
+
+    sendToken=(token)=>{
+        this.props.getToken({token: token})
+    }
+
+
     handleChange = e => {
         const name = e.target.name;
         const value = e.target.value;
@@ -96,7 +101,7 @@ export default class Login extends Component {
                     type="submit"
                     className="btn btn-primary"
                     >
-                    Signup
+                    Login
                     </button>
                 </form>
                 </div>
