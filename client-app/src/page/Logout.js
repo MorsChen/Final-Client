@@ -14,7 +14,7 @@ export default class Logout extends React.Component {
         this.deltoken()
     }
     deltoken = async () => {
-        console.log('check token inside', this.state.state.token)
+        console.log('check token inside', this.state.token)
         console.log('check URL', `${URL}logout`)
         const response = await fetch(`${URL}logout`, {
         method: 'GET',
