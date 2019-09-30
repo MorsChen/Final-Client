@@ -9,9 +9,10 @@ import Home from "./page/Home";
 import SignUp from "./page/SignUp";
 import Login from "./page/Login";
 import Logout from "./page/Logout";
+import Profile from "./page/Profile";
 import NavBar from "./static/NavBar";
 
-const URL = `https://127.0.0.1:5000/`
+// const URL = `https://127.0.0.1:5000/`
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -52,6 +53,7 @@ export default class App extends React.Component {
             <Route path="/events/" exact component={Events} />
             <Route path="/studio/" exact component={Studio} />
             <Route path="/workshop/" component={Workshop} />
+            <Route path="/profile/" exact component={Profile} />
             <Route path="/courses/" component={Courses} />
             {/* <Route path="/learningpaths/" component={LearningPaths} /> */}
             <Route path="/login/" component={Login} />
