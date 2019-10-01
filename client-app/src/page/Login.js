@@ -2,16 +2,19 @@ import React, {Component} from "react";
 // import { Form, Col, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const URL = `https://127.0.0.1:5000/login/facebook`
 export default class Login extends Component {
     constructor() {
         super();
         this.state = {
-            isSignin: false,
             email: "",
             password: "",
             user: {},
         };
       }
+
+    componentDidMount () {
+    }
 
     handleLogin = async e => {
         e.preventDefault();
@@ -39,15 +42,14 @@ export default class Login extends Component {
         if (data.status === 200) {
             this.sendToken(data.token)
             localStorage.setItem('token', data.token)
-            this.setState({
-                user: data.user,
-            })
-            window.location.replace(`http://localhost:3000/`);}
-        else return alert('something wrong')
+    
+            return window.location.replace(`http://localhost:3000/`);
+        }
+            else {return alert('something wrong')}
         };
 
     sendToken=(token)=>{
-        this.props.getToken({token: token})
+        this.props.getToken(token)
     }
 
 
@@ -61,9 +63,10 @@ export default class Login extends Component {
 
     render() {
         console.log("check email",this.state.email);
+        console.log('check isSignin login', this.state.user)
         
         return (
-            <div className="container">
+            <div className="FullContent">
             <div className="jumbotron jumbotron-fluid custome-jumbo">
                 <div className="container">
                 <form  
@@ -71,6 +74,7 @@ export default class Login extends Component {
                     onChange={e => this.handleChange(e)}
                 >
                     <div className="form-group">
+                    <h1 style={{ textAlign: "center" }}>Sign In</h1>
                     <label for="exampleInputEmail1">Email address</label>
                     <input
                         type="email"
@@ -102,6 +106,13 @@ export default class Login extends Component {
                     className="btn btn-primary"
                     >
                     Login
+                    </button><br/>
+                    <button
+                    // type="submit"
+                    className="btn btn-primary"
+                    onClick = {()=>window.location.replace(`${URL}`)}
+                    >
+                    Login with facebook
                     </button>
                 </form>
                 </div>

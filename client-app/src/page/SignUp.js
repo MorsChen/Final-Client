@@ -59,8 +59,8 @@ export default class Signup extends Component {
                 this.setState({
                     user: data.user,
                 })
-                window.location.replace(`http://localhost:3000/`);}
-            else return alert('something wrong')
+               return window.location.replace(`http://localhost:3000/`);}
+            else {return alert('something wrong')}
             
             
         }
@@ -93,7 +93,7 @@ export default class Signup extends Component {
                     onChange={e => this.handleChange(e)}
                 >
                     <div className="form-group">
-                    <h1 style={{ textAlign: "center" }}>Signup</h1>
+                    <h1 style={{ textAlign: "center" }}>Sign Up</h1>
                     <label for="exampleInputEmail1">Username</label>
                     <input
 

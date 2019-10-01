@@ -88,10 +88,11 @@
 .FullContent {
   display: flex;
   width: 100vw;
-  height: 100vh;
+  height: 89vh;
   text-align: center;
   align-items: center;
   flex-direction: column;
+  background-color: rgba(32, 32, 32, 0.096);
   margin-top: 2rem;
 }
 

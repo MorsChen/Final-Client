@@ -29,9 +29,8 @@ export default class Logout extends React.Component {
         if (status.status === 200) {
             localStorage.clear('token')
             this.setState({ token: null })
-            window.location.replace(`http://localhost:3000/`);}
-        else return alert('something wrong')
-       
+            return window.location.replace(`http://localhost:3000/`);}
+            else {return alert('something wrong')}
     }
     sendToken=(token)=>{
         this.props.getToken({token: token})

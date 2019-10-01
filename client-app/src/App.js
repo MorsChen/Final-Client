@@ -9,7 +9,7 @@ import Home from "./page/Home";
 import SignUp from "./page/SignUp";
 import Login from "./page/Login";
 import Logout from "./page/Logout";
-import Profile from "./page/Profile";
+import Profile, {EditProfile, CreateProfile} from "./page/Profile";
 import NavBar from "./static/NavBar";
 
 // const URL = `https://127.0.0.1:5000/`
@@ -28,27 +28,70 @@ export default class App extends React.Component {
     };
     
     this.state = {
-      events: [],
-      blogs: [],
-      users: [],
-      profiles: [],
-      comments: [],
-      news: [],
-      token: existingToken || accessToken
+      isloading:true,
+      events: {},
+      blogs: {},
+      users: {},
+      profiles: {},
+      comments: {},
+      news: {},
+      token: existingToken || accessToken,
+      user:{isSignin:false}
     }
   }
   
+  componentDidMount() {
+    this.fetchhome()
+    this.fetchUser()
+  }
+
+  fetchUser= async() =>{
+    const a = await fetch('https://127.0.0.1:5000/getuserinfo',{
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Token ${this.state.token}`
+      }
+    })
+    const b = await a.json()
+    if (b.status === 200) {
+      b.user.isSignin= true;
+      b.user.token = this.state.token
+      this.setState({isloading:true,user:b.user})
+    }
+  }
+
+  fetchhome = async()=>{
+    const token = this.state.token
+    const resp = await fetch(`https://127.0.0.1:5000/userload`, {
+            method: "GET",
+            headers: ({
+                "Content-Type": "application/json",
+                "Authorization": `Token ${token}`
+                })
+            });
+    const data = await resp.json()
+    console.log("home data",data)
+  }
+
   getToken = (token) => {
     this.setState({token : token})
+    
   }
+  // isSignin = () =>{
+  //   if (this.state.token !== null){
+  //     this.setState({ isSignin : true})
+  //   }else {
+  //     this.setState({isSignin: false})
+  //   }
+  //   localStorage.setItem('isSignin', this.isSignin)
+  // }
 
   render() {
     console.log('check state', this.state)
-    console.log('check token login', this.state.token)
     return (
       <div className="App">
         <Router>
-            <NavBar state = {this.state} />
+            <NavBar user = {this.state.user} />
             
   
           <div className="mag-top">
@@ -56,10 +99,12 @@ export default class App extends React.Component {
             <Route path="/events/" exact component={Events} />
             <Route path="/studio/" exact component={Studio} />
             <Route path="/workshop/" component={Workshop} />
-            <Route path="/profile/" exact component={ (props) => <Profile {...props} token = {this.state.token} />} />
+            <Route path="/profile/" exact component={ (props) => <Profile {...props} user = {this.state.user} />} />
+            <Route path="/profile/create/" component ={(props)=> <CreateProfile {...props} user = {this.state.user} />}/>
+            <Route path="/profile/edit/" component ={(props)=> <EditProfile {...props} user = {this.state.user} />}/>
             <Route path="/courses/" component={Courses} />
             {/* <Route path="/learningpaths/" component={LearningPaths} /> */}
-            <Route path="/login/" component={ (props) => <Login {...props} getToken = {this.getToken}/>}/>
+            <Route path="/login/" component={ (props) => <Login {...props} getToken = {this.getToken} />}/>
             <Route path="/logout/" component= { (props) => <Logout {...props} token = {this.state.token} />}/>
             <Route path="/register/" component={SignUp} />
             <Route path="/about/" component={About} />
