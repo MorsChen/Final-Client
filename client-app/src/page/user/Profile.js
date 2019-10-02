@@ -69,28 +69,32 @@ class Profile extends Component {
 }
 
 class EditProfile extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            isSignin: false,
-            firsname: "",
-            lastname: "",
-            email: "",
-            password: "",
-            repassword: "",
-            address: "",
-            birthday: new Date(),
-            phone: "",
-            city: "",
-            state: "",
-            zipcode: "",
+    constructor(props) {
+        super(props);
+        this.state = {...props, isLoaded : false, isUserinfo: true,
+            profile: {
+                isSignin: false,
+                firsname: "",
+                lastname: "",
+                email: "",
+                password: "",
+                repassword: "",
+                address: "",
+                birthday: new Date(),
+                phone: "",
+                city: "",
+                state: "",
+                zipcode: "",
+                    },
         };
       }
 
     handleRegister = async e => {
         e.preventDefault();
-        if (this.state.password !== this.state.repassword) {
-            alert("Password and Password confirm must match");
+        console.log("user isSignin 94", this.state.user.isSignin)
+        if (this.state.user.isSignin !== true) {
+            alert("Please login");
+            return window.location.replace(`http://localhost:3000/login/`)
         }
         else {
             let editprofile = {
@@ -140,8 +144,8 @@ class EditProfile extends React.Component {
 
     render() {
         console.log("check username",this.state.username);
-        console.log(this.state.birthday.toISOString().slice(0, 10))
-        console.log(new Date().toISOString().slice(0, 10))
+        // console.log(this.state.birthday.toISOString().slice(0, 10))
+        // console.log(new Date().toISOString().slice(0, 10))
         return (
             <div className="container">
             <div className="jumbotron jumbotron-fluid custome-jumbo">
@@ -307,8 +311,9 @@ class CreateProfile extends React.Component {
 
     handleRegister = async e => {
         e.preventDefault();
-        if (this.state.password !== this.state.repassword) {
-            alert("Password and Password confirm must match");
+        if (this.state.user.isSignin !== true) {
+            alert("Please login");
+            return window.location.replace(`http://localhost:3000/login/`)
         }
         else {
             let newprofile = {

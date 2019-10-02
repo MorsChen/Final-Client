@@ -59,12 +59,11 @@ export default class Signup extends Component {
                 this.setState({
                     user: data.user,
                 })
-               return window.location.replace(`http://localhost:3000/`);}
-            else {return alert('something wrong')}
-            
-            
+               return window.location.replace(`http://localhost:3000/`);
+            }
+            else return alert('something wrong') 
         }
-        };
+    };
     handleChange = e => {
         const name = e.target.name;
         const value = e.target.value;
