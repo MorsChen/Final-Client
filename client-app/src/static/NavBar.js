@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Nav} from "react-bootstrap";
+import { Navbar, Nav, NavDropdown} from "react-bootstrap";
 
 
 export default class NavBar extends React.Component {
@@ -17,13 +17,24 @@ export default class NavBar extends React.Component {
                 <Link class="nav-link" to="/">
                     Home
                   </Link>
-                  <Link class="nav-link" to="/events/">
-                    Events
-                  </Link>
                   <Link class="nav-link" to="/studio/">
                     Studio
                   </Link>
                   {this.props.user.isSignin ? <>
+                    <NavDropdown title="Events" id="basic-nav-dropdown">
+                    <Link class="dropdown-item" to="/events/">
+                        List
+                        </Link>
+                        <Link class="dropdown-item" to="/events/list">
+                        Your Events
+                        </Link>
+                        <Link class="dropdown-item" to="/events/add">
+                        Create Events
+                        </Link>
+                        
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item href="#action/3.4">Contact US</NavDropdown.Item>
+                    </NavDropdown>
                     <Link class="nav-link" to="/workshop/">
                     WorkShop
                     </Link>
@@ -37,15 +48,12 @@ export default class NavBar extends React.Component {
                       About
                     </Link>
                     </> : <>
+                    <Link class="nav-link" to="/events/">
+                    Events
+                  </Link>
                       </>}
                   
-                {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                </NavDropdown> */}
+                
               </Nav>
               <Nav className="mr-0">
                   {this.props.user.isSignin ? <><Link class="nav-link" to="/logout">Logout</Link>

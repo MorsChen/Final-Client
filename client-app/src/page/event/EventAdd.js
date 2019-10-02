@@ -168,4 +168,13 @@ class EventAdd extends React.Component {
         );
     }
 }
+
+class EditEvent extends React.Component {
+    render(){
+        return [
+            <div className="FullContent"> Edit Event</div>
+        ]
+    }
+}
 export default EventAdd
+export {EditEvent}

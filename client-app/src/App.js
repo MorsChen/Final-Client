@@ -12,7 +12,8 @@ import Login from "./page/user/Login";
 import Logout from "./page/user/Logout";
 import Profile, {EditProfile, CreateProfile} from "./page/user/Profile";
 import NavBar from "./static/NavBar";
-import EventAdd from "./page/event/EventAdd";
+import Events from "./page/event/Events";
+import EventAdd, {EditEvent} from "./page/event/EventAdd";
 import EventList, { SingleEvent } from "./page/event/EventList";
 
 // const URL = `https://127.0.0.1:5000/`
@@ -39,11 +40,19 @@ export default class App extends React.Component {
     if (accessToken) {
         localStorage.setItem('token', accessToken);
     };
-    
-    this.setState ({
+
+    this.state = {
+      isloading:true,
+      events: {},
+      blogs: {},
+      users: {},
+      profiles: {},
+      comments: {},
+      news: {},
       token: existingToken || accessToken,
-      user:{isSignin:false}
-    })
+      user:{isSignin:false},
+    }
+    
   }
   
   componentDidMount() {
@@ -57,10 +66,10 @@ export default class App extends React.Component {
       }
     })
     const b = await a.json()
-    console.log("check b", b)
-    console.log("check b status", b.map((c) =>c.status))
-    console.log("check b event", b.map((c) =>c.event))
-    
+    if (b.status === 200) {
+      this.setState({events:b.event, isLoaded: true})
+    }
+    console.log("fetch full events", this.state.events)
   }
   
   fetchUser= async() =>{
@@ -74,7 +83,7 @@ export default class App extends React.Component {
     if (b.status === 200) {
       b.user.isSignin= true;
       b.user.token = this.state.token
-      this.setState({isloading:true,user:b.user, events:b.event})
+      this.setState({isloading:true,user:b.user})
     }
   }
 
@@ -82,10 +91,8 @@ export default class App extends React.Component {
     this.setState({token : token})
     
   }
-
+  
   render() {
-    console.log('check state', this.state)
-    console.log('check events', this.state.events)
     return (
       <div className="App">
         <Router>
@@ -93,18 +100,18 @@ export default class App extends React.Component {
             
   
           <div className="mag-top">
+          <Route path="/" exact component={Home}/>
+            <Route path="/events/" exact component={ (props) => <Events {...props} user = {this.state.user} events={this.state.events} />} />
+            
             <Route path="/profile/" exact component={ (props) => {if(this.state.user.isSignin === true) { 
               return <Profile {...props} user = {this.state.user}/>
              }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
-
             <Route path="/profile/create/" component ={(props)=> {if(this.state.user.isSignin === true) { 
               return <CreateProfile {...props} user = {this.state.user}/>
              }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
-
             <Route path="/profile/edit/" component ={(props)=> {if(this.state.user.isSignin === true) { 
               return <EditProfile {...props} user = {this.state.user}/>
              }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
-
             <Route path="/logout/" component= { (props) => {if(this.state.user.isSignin === true) { 
               return <Logout {...props} token = {this.state.token}/>
              }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
@@ -113,14 +120,22 @@ export default class App extends React.Component {
             <Route path="/register/" component={SignUp} />
             <Route path="/login/" component={ (props) => <Login {...props} getToken = {this.getToken} />}/>
             </>}
-            <Route path="/" exact component={Home}/>
-            <Route path="/events/" exact component={Events} />
-            <Route path="/event/add" component={ (props) => <EventAdd {...props} user = {this.state.user} />} />
-            <Route path="/event/list" component={ (props) => <EventList {...props} user = {this.state.user} />} />
-            <Route path="/event/single/" component={ (props) => <SingleEvent {...props} user = {this.state.user} />} />
+            
+            <Route path="/events/add" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <EventAdd {...props} user = {this.state.user} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/events/list" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <EventList {...props} user = {this.state.user} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/events/single/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <SingleEvent {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/events/edit/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <EditEvent {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+
             <Route path="/studio/" exact component={Studio} />
             <Route path="/workshop/" component={Workshop} />
-
             <Route path="/courses/" component={Courses} />
             <Route path="/about/" component={About} />
           </div>
@@ -131,10 +146,6 @@ export default class App extends React.Component {
     );
   }
  
-}
-
-function Events() {
-  return <div className="FullContent"> Events </div>;
 }
 
 function Studio() {
