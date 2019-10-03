@@ -52,7 +52,8 @@ class Events extends React.Component {
                 <div>
                 {e.owner_id !== this.state.user.id ? <>
                 </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/${e.id}/edit`)}>Edit Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/edit/${e.event_id}`)}>Edit Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/delete/${e.event_id}`)}>Delete Event</button>
                 </>}
                 
                 <p onClick={()=>window.location.replace(`http://localhost:3000/events/single/${e.event_id}`)}>

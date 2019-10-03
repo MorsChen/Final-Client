@@ -13,7 +13,7 @@ import Logout from "./page/user/Logout";
 import Profile, {EditProfile, CreateProfile} from "./page/user/Profile";
 import NavBar from "./static/NavBar";
 import Events from "./page/event/Events";
-import EventAdd, {EditEvent} from "./page/event/EventAdd";
+import EventAdd, {EditEvent, DelEvent} from "./page/event/EventAdd";
 import EventList, { SingleEvent } from "./page/event/EventList";
 
 // const URL = `https://127.0.0.1:5000/`
@@ -101,7 +101,7 @@ export default class App extends React.Component {
   
           <div className="mag-top">
           <Route path="/" exact component={Home}/>
-            <Route path="/events/" exact component={ (props) => <Events {...props} user = {this.state.user} events={this.state.events} />} />
+            <Route path="/events/" exact component={ (props) => <Events {...props} user = {this.state.user} />} />
             
             <Route path="/profile/" exact component={ (props) => {if(this.state.user.isSignin === true) { 
               return <Profile {...props} user = {this.state.user}/>
@@ -132,6 +132,9 @@ export default class App extends React.Component {
                 }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
             <Route path="/events/edit/:id" component={ (props) => {if(this.state.user.isSignin === true) {
                 return <EditEvent {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/events/delete/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <DelEvent {...props} user = {this.state.user} id = {props.match.params.id} />
                 }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
 
             <Route path="/studio/" exact component={Studio} />

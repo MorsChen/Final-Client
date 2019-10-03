@@ -36,10 +36,5 @@ export default class Logout extends React.Component {
         this.props.getToken({token: token})
     }
 
-    render (){
-        
-        return [
-
-        ]
-    }
+    render (){ return []}
 }

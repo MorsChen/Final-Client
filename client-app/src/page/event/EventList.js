@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-
-import DatePicker from "react-datepicker";
+import Moment from 'react-moment';
+import 'moment-timezone';
 import "react-datepicker/dist/react-datepicker.css";
 
 
@@ -50,7 +50,8 @@ class EventList extends Component {
                 <div>
                 {e.owner_id !== this.state.user.id ? <>
                 </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/${e.id}/edit`)}>Edit Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/edit/${e.event_id}`)}>Edit Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/delete/${e.event_id}`)}>Delete Event</button>
                 </>}
                 
                 <p onClick={()=>window.location.replace(`http://localhost:3000/events/single/${e.event_id}`)}>
@@ -58,11 +59,11 @@ class EventList extends Component {
                 <img src={`${e.image_url}`} style={{width: '80vw', height: '50vh'}}/>
                 <p>Description: {e.description}</p>
                 <p>Address: {e.address}</p>
-                <p>Time Start : {e.datetimestart}</p>
-                <p>Time End : {e.datetimeend}</p>
+                <p>Time Start : <Moment date={e.datetimestart}/></p>
+                <p>Time End : <Moment date={e.datetimeend}/></p>
                 <p>Views : {e.views}</p>
-                <p>Created : {e.created}</p>
-                <p>Updated : {e.updated}</p>
+                <p>Created : <Moment date={e.created}/></p>
+                <p>Updated : <Moment date={e.updated}/></p>
                 </div>
                 )
                 })}
@@ -85,8 +86,7 @@ class SingleEvent extends Component {
 
     getprofile = async() => {
         const token = this.state.user.token
-        console.log("check events", this.props.id)
-        const id = this.props.id
+        const id = this.state.id
         const resp = await fetch(`https://127.0.0.1:5000/events/single/${id}`, {
             method: "GET",
             headers: ({
@@ -110,7 +110,6 @@ class SingleEvent extends Component {
         return [
             <div className="FullContent">
                 <h3>Event</h3>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/add`)}>Add Event</button>
                 {this.state.isEventInfo ? <>
                 </>:<>
                 <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/add`)}>Create Event</button>
@@ -119,7 +118,8 @@ class SingleEvent extends Component {
                 {this.state.isEventInfo ? <> {this.state.isLoaded ? <>
                 {e.owner_id !== this.state.user.id ? <>
                 </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/${e.id}/edit`)}>Edit Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/edit/${e.event_id}`)}>Edit Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/delete/${e.event_id}`)}>Delete Event</button>
                 </>}
                 
                 <p>
@@ -127,11 +127,14 @@ class SingleEvent extends Component {
                 <img src={`${e.image_url}`} style={{width: '80vw', height: '50vh'}}/>
                 <p>Description: {e.description}</p>
                 <p>Address: {e.address}</p>
-                <p>Time Start : {e.datetimestart}</p>
-                <p>Time End : {e.datetimeend}</p>
+                <p>Time Start : <Moment date={e.datetimestart}/></p>
+                <p>Time End : <Moment date={e.datetimeend}/></p>
                 <p>Views : {e.views}</p>
-                <p>Created : {e.created}</p>
-                <p>Updated : {e.updated}</p>
+                <p>Created : <Moment date={e.created}/></p>
+                <p>Updated : <Moment date={e.updated}/></p>
+
+                
+
                 </> : <div>Loading...</div>} </> : <></>}
             </div>
         ]
