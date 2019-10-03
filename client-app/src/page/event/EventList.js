@@ -3,12 +3,11 @@ import Moment from 'react-moment';
 import 'moment-timezone';
 import "react-datepicker/dist/react-datepicker.css";
 
-
+const URLB = process.env.REACT_APP_BACKEND_URL
 class EventList extends Component {
     constructor(props) {
         super(props);
         this.state = {...props, isLoaded : false, isEventInfo: true};
-        console.log("check props Profile", this.state)
       }
     componentDidMount(){
         this.getevents()
@@ -16,7 +15,7 @@ class EventList extends Component {
 
     getevents = async() => {
         const token = this.props.user.token
-        const resp = await fetch(`https://127.0.0.1:5000/events/list`, {
+        const resp = await fetch(`${URLB}events/list`, {
             method: "GET",
             headers: ({
                 "Content-Type": "application/json",
@@ -24,7 +23,6 @@ class EventList extends Component {
                 })
             });
         const data = await resp.json()
-        console.log ("check data from backend", data)
         if (data.status = 200){
             if (data.event === null){
                 this.setState({isEventInfo: false})}
@@ -34,8 +32,6 @@ class EventList extends Component {
         }
     }
     render(){
-        console.log("check isEventInfo", this.state.events)
-        console.log("check state list event ", this.state)
         return [
             <div className="FullContent">
                 <h3>Event List</h3>
@@ -78,7 +74,6 @@ class SingleEvent extends Component {
     constructor(props) {
         super(props);
         this.state = {...props, isLoaded : false, isEventInfo: true};
-        console.log("check event id", this.state)
       }
     componentDidMount(){
         this.getprofile()
@@ -87,7 +82,7 @@ class SingleEvent extends Component {
     getprofile = async() => {
         const token = this.state.user.token
         const id = this.state.id
-        const resp = await fetch(`https://127.0.0.1:5000/events/single/${id}`, {
+        const resp = await fetch(`${URLB}events/single/${id}`, {
             method: "GET",
             headers: ({
                 "Content-Type": "application/json",
@@ -95,7 +90,6 @@ class SingleEvent extends Component {
                 })
             });
         const data = await resp.json()
-        console.log ("check data from login", data)
         if (data.status = 200){
             if (data.event === null){
                 this.setState({isEventInfo: false})}
@@ -105,7 +99,6 @@ class SingleEvent extends Component {
         }
     }
     render(){
-        console.log("check isEventInfo", this.state.event)
         const e = this.state.event
         return [
             <div className="FullContent">

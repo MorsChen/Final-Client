@@ -7,7 +7,6 @@ export default class NavBar extends React.Component {
   
 
   render () {
-    console.log('check pass user', this.props.user)
       return [
           <Navbar bg="light" expand="lg">
           <Link class="navbar-brand" to="/">ART NOTE</Link>

@@ -8,7 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { es } from "date-fns/esm/locale";
 
-
+const URLB = process.env.REACT_APP_BACKEND_URL
 class EventAdd extends React.Component {
     constructor() {
         super();
@@ -39,10 +39,8 @@ class EventAdd extends React.Component {
             datetimestart: this.state.datetimestart,
             datetimeend: this.state.datetimeend,
             };
-            console.log("check new event", newevent)
             const token = this.props.user.token
-            console.log("check token event add", token)
-            const response = await fetch(`https://127.0.0.1:5000/events/add`, {
+            const response = await fetch(`${URLB}events/add`, {
             method: "POST",
             body: JSON.stringify(newevent),
             headers: new Headers({
@@ -51,7 +49,6 @@ class EventAdd extends React.Component {
             })
             });
             const data = await response.json()
-            console.log("check resp from login",data)
             if (data.status === 200) {  
                return window.location.replace(`http://localhost:3000/events/`);}
             else {return alert('something wrong')}
@@ -80,7 +77,6 @@ class EventAdd extends React.Component {
     };
 
     render() {
-        console.log("check username",this.props.user);
         return (
             <div className="container">
             <div className="jumbotron jumbotron-fluid custome-jumbo">
@@ -184,7 +180,6 @@ class DelEvent extends Component {
             datetimestart: new Date(),
             datetimeend: new Date(), 
         };
-        console.log("check event id 184 eventdel", this.state)
       }
     componentDidMount(){
         this.getprofile()
@@ -193,7 +188,7 @@ class DelEvent extends Component {
     getprofile = async() => {
         const token = this.state.user.token
         const id = this.state.id
-        const resp = await fetch(`https://127.0.0.1:5000/events/delete/${id}`, {
+        const resp = await fetch(`${URLB}events/delete/${id}`, {
             method: "GET",
             headers: ({
                 "Content-Type": "application/json",
@@ -201,7 +196,6 @@ class DelEvent extends Component {
                 })
             });
         const data = await resp.json()
-        console.log ("check data from login", data)
         if (data.status = 200){
             return window.location.replace(`http://localhost:3000/events`)}
         else {return alert('something wrong')}
@@ -217,8 +211,6 @@ class EditEvent extends React.Component {
             isEventInfo: true, 
             datetimestart: '',
             datetimeend: ''};
-        console.log("check id ",this.state.id)
-        console.log("check token ",this.state)
       }
     componentDidMount(){
         this.geteventtoedit()
@@ -226,7 +218,7 @@ class EditEvent extends React.Component {
     geteventtoedit = async() => {
         const token = this.state.user.token
         const id = this.state.id
-        const resp = await fetch(`https://127.0.0.1:5000/events/single/${id}`, {
+        const resp = await fetch(`${URLB}events/single/${id}`, {
             method: "GET",
             headers: ({
                 "Content-Type": "application/json",
@@ -234,7 +226,6 @@ class EditEvent extends React.Component {
                 })
             });
         const data = await resp.json()
-        console.log ("check data from login", data)
         if (data.status = 200){
             if (data.event === null){
                 this.setState({isEventInfo: false})}
@@ -248,7 +239,6 @@ class EditEvent extends React.Component {
         const id = this.state.id
         e.preventDefault();
         const i = this.state.event
-        console.log('check event onSubmit', i)
         if (this.state.user.isSignin !== true) {
             alert("Please login");
             return window.location.replace(`http://localhost:3000/login/`)
@@ -262,10 +252,7 @@ class EditEvent extends React.Component {
             datetimestart: this.state.datetimestart || i.datetimestart,
             datetimeend: this.state.datetimeend || i.datetimeend,
             };
-            console.log("check new event", newevent)
             const token = this.props.user.token
-            
-            console.log("check token event id", id)
             const response = await fetch(`https://127.0.0.1:5000/events/edit/${id}`, {
             method: "POST",
             body: JSON.stringify(newevent),
@@ -275,7 +262,6 @@ class EditEvent extends React.Component {
             })
             });
             const data = await response.json()
-            console.log("check resp from login",data)
             if (data.status === 200) {  
                return window.location.replace(`http://localhost:3000/events/single/${id}`);}
             else {return alert('something wrong')}
@@ -413,7 +399,5 @@ class EditEvent extends React.Component {
         );
     }
 }
-
-
 export default EventAdd
 export {EditEvent,DelEvent}

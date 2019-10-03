@@ -2,6 +2,7 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from "react-bootstrap";
 
+const URLB = process.env.REACT_APP_BACKEND_URL
 class Events extends React.Component {
     constructor(props) {
         super(props);
@@ -15,15 +16,13 @@ class Events extends React.Component {
     }
 
     getevents = async() => {
-        const token = this.props.user.token
-        const resp = await fetch(`https://127.0.0.1:5000/events/`, {
+        const resp = await fetch(`${URLB}events/`, {
             method: "GET",
             headers: ({
                 "Content-Type": "application/json",
                 })
             });
         const data = await resp.json()
-        console.log ("check data from backend", data)
         if (data.status = 200){
             if (data.event === null){
                 this.setState({isEventInfo: false})}

@@ -1,6 +1,6 @@
 import React from "react";
 
-const URL = `https://127.0.0.1:5000/`
+const URLB = process.env.REACT_APP_BACKEND_URL
 
 export default class Logout extends React.Component {
     constructor(props){
@@ -15,8 +15,7 @@ export default class Logout extends React.Component {
     }
     deltoken = async () => {
         console.log('check token inside', this.state.token)
-        console.log('check URL', `${URL}logout`)
-        const response = await fetch(`${URL}logout`, {
+        const response = await fetch(`${URLB}logout`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -25,7 +24,6 @@ export default class Logout extends React.Component {
         }
         })
         const status = await response.json()
-        console.log('STATUS',status.status)
         if (status.status === 200) {
             localStorage.clear('token')
             this.setState({ token: null })

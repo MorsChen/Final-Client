@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+const URLB = process.env.REACT_APP_BACKEND_URL
 class Profile extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +17,7 @@ class Profile extends Component {
 
     getprofile = async() => {
         const token = this.state.user.token
-        const resp = await fetch(`https://127.0.0.1:5000/users/profile`, {
+        const resp = await fetch(`${URLB}users/profile`, {
             method: "GET",
             headers: ({
                 "Content-Type": "application/json",
@@ -24,7 +25,6 @@ class Profile extends Component {
                 })
             });
         const data = await resp.json()
-        console.log ("check data from login", data)
         if (data.status = 200){
             if (data.user === null){
                 this.setState({isUserinfo: false})}
@@ -46,7 +46,6 @@ class Profile extends Component {
         }
     }
     render(){
-        console.log('check state 42' , this.state)
         return [
             <div className="FullContent">
                 <h3>PROFILE</h3>
@@ -91,7 +90,6 @@ class EditProfile extends React.Component {
 
     handleRegister = async e => {
         e.preventDefault();
-        console.log("user isSignin 94", this.state.user.isSignin)
         if (this.state.user.isSignin !== true) {
             alert("Please login");
             return window.location.replace(`http://localhost:3000/login/`)
@@ -109,9 +107,8 @@ class EditProfile extends React.Component {
             state: this.state.state,
             zipcode: this.state.zipcode,
             };
-            console.log(editprofile)
             const token = this.props.user.token
-            const response = await fetch(`https://127.0.0.1:5000/users/profile/edit`, {
+            const response = await fetch(`${URLB}/users/profile/edit`, {
             method: "POST",
             body: JSON.stringify(editprofile),
             headers: new Headers({
@@ -120,7 +117,6 @@ class EditProfile extends React.Component {
             })
             });
             const data = await response.json()
-            console.log("check resp from login",data)
             if (data.status === 200) {  
                return window.location.replace(`http://localhost:3000/users/profile/`);}
             else {return alert('something wrong')}
@@ -143,9 +139,6 @@ class EditProfile extends React.Component {
     };
 
     render() {
-        console.log("check username",this.state.username);
-        // console.log(this.state.birthday.toISOString().slice(0, 10))
-        // console.log(new Date().toISOString().slice(0, 10))
         return (
             <div className="container">
             <div className="jumbotron jumbotron-fluid custome-jumbo">
@@ -327,9 +320,8 @@ class CreateProfile extends React.Component {
             state: this.state.state,
             zipcode: this.state.zipcode,
             };
-            console.log(newprofile)
             const token = this.props.user.token
-            const response = await fetch(`https://127.0.0.1:5000/users/profile/create`, {
+            const response = await fetch(`${URLB}users/profile/create`, {
             method: "POST",
             body: JSON.stringify(newprofile),
             headers: new Headers({
@@ -338,7 +330,6 @@ class CreateProfile extends React.Component {
             })
             });
             const data = await response.json()
-            console.log("check resp from login",data)
             if (data.status === 200) {  
                return window.location.replace(`http://localhost:3000/users/profile/`);}
             else {return alert('something wrong')}
@@ -362,9 +353,6 @@ class CreateProfile extends React.Component {
     };
 
     render() {
-        console.log("check username",this.state.username);
-        console.log(this.state.birthday.toISOString().slice(0, 10))
-        console.log(new Date().toISOString().slice(0, 10))
         return (
             <div className="container">
             <div className="jumbotron jumbotron-fluid custome-jumbo">

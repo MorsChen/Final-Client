@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Carousel, Container, Row } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const URLB = process.env.REACT_APP_BACKEND_URL
 export default class Hone extends Component {
   render() {
     return (

@@ -16,7 +16,7 @@ import Events from "./page/event/Events";
 import EventAdd, {EditEvent, DelEvent} from "./page/event/EventAdd";
 import EventList, { SingleEvent } from "./page/event/EventList";
 
-// const URL = `https://127.0.0.1:5000/`
+const URLB = process.env.REACT_APP_BACKEND_URL
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -60,7 +60,7 @@ export default class App extends React.Component {
     this.fetchUser()
   }
   fetchhome = async () => {
-    const a = await fetch('https://127.0.0.1:5000/',{
+    const a = await fetch(`${URLB}`,{
       headers: {
         "Content-Type": "application/json"
       }
@@ -69,11 +69,10 @@ export default class App extends React.Component {
     if (b.status === 200) {
       this.setState({events:b.event, isLoaded: true})
     }
-    console.log("fetch full events", this.state.events)
   }
   
   fetchUser= async() =>{
-    const a = await fetch('https://127.0.0.1:5000/getuserinfo',{
+    const a = await fetch(`${URLB}getuserinfo`,{
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Token ${this.state.token}`
