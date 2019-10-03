@@ -1,7 +1,7 @@
 import React from "react";
 
 const URLB = process.env.REACT_APP_BACKEND_URL
-
+const URLF = process.env.REACT_APP_FRONTEND_URL
 export default class Logout extends React.Component {
     constructor(props){
         super(props)
@@ -27,7 +27,7 @@ export default class Logout extends React.Component {
         if (status.status === 200) {
             localStorage.clear('token')
             this.setState({ token: null })
-            return window.location.replace(`http://localhost:3000/`);}
+            return window.location.replace(`${URLF}`);}
             else {return alert('something wrong')}
     }
     sendToken=(token)=>{

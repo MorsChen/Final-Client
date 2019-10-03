@@ -4,6 +4,7 @@ import 'moment-timezone';
 import "react-datepicker/dist/react-datepicker.css";
 
 const URLB = process.env.REACT_APP_BACKEND_URL
+const URLF = process.env.REACT_APP_FRONTEND_URL
 class EventList extends Component {
     constructor(props) {
         super(props);
@@ -37,7 +38,7 @@ class EventList extends Component {
                 <h3>Event List</h3>
                 {this.state.isEventInfo ? <>
                 </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/add`)}>Create Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/add`)}>Create Event</button>
                 </>}
                 
                 {this.state.isEventInfo ? <> {this.state.isLoaded ? <> {this.state.events && 
@@ -46,11 +47,11 @@ class EventList extends Component {
                 <div>
                 {e.owner_id !== this.state.user.id ? <>
                 </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/edit/${e.event_id}`)}>Edit Event</button>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/delete/${e.event_id}`)}>Delete Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/edit/${e.event_id}`)}>Edit Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/delete/${e.event_id}`)}>Delete Event</button>
                 </>}
                 
-                <p onClick={()=>window.location.replace(`http://localhost:3000/events/single/${e.event_id}`)}>
+                <p onClick={()=>window.location.replace(`${URLF}events/single/${e.event_id}`)}>
                 Event Title : {e.title}</p>
                 <img src={`${e.image_url}`} style={{width: '80vw', height: '50vh'}}/>
                 <p>Description: {e.description}</p>
@@ -105,14 +106,14 @@ class SingleEvent extends Component {
                 <h3>Event</h3>
                 {this.state.isEventInfo ? <>
                 </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/add`)}>Create Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/add`)}>Create Event</button>
                 </>}
                 
                 {this.state.isEventInfo ? <> {this.state.isLoaded ? <>
                 {e.owner_id !== this.state.user.id ? <>
                 </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/edit/${e.event_id}`)}>Edit Event</button>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/delete/${e.event_id}`)}>Delete Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/edit/${e.event_id}`)}>Edit Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/delete/${e.event_id}`)}>Delete Event</button>
                 </>}
                 
                 <p>

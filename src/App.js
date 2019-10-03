@@ -17,6 +17,7 @@ import EventAdd, {EditEvent, DelEvent} from "./page/event/EventAdd";
 import EventList, { SingleEvent } from "./page/event/EventList";
 
 const URLB = process.env.REACT_APP_BACKEND_URL
+const URLF = process.env.REACT_APP_FRONTEND_URL
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -34,7 +35,7 @@ export default class App extends React.Component {
     }
 
     if (!accessToken && !existingToken){
-        window.location.replace(`localhost:3000/`)
+        window.location.replace(`${URLF}`)
     };
 
     if (accessToken) {

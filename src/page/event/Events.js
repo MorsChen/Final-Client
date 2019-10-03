@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from "react-bootstrap";
 
 const URLB = process.env.REACT_APP_BACKEND_URL
+const URLF = process.env.REACT_APP_FRONTEND_URL
 class Events extends React.Component {
     constructor(props) {
         super(props);
@@ -39,10 +40,10 @@ class Events extends React.Component {
                 <h3>Event List</h3>
                 {this.state.isEventInfo ? <>
                 </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/add`)}>Create Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/add`)}>Create Event</button>
                 </>}
                 {this.state.user.isSignin ? <>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/add`)}>Create Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/add`)}>Create Event</button>
                 </>:<></>}
                 
                 {this.state.isEventInfo ? <> {this.state.isLoaded ? <> {this.state.events && 
@@ -51,11 +52,11 @@ class Events extends React.Component {
                 <div>
                 {e.owner_id !== this.state.user.id ? <>
                 </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/edit/${e.event_id}`)}>Edit Event</button>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/events/delete/${e.event_id}`)}>Delete Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/edit/${e.event_id}`)}>Edit Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/delete/${e.event_id}`)}>Delete Event</button>
                 </>}
                 
-                <p onClick={()=>window.location.replace(`http://localhost:3000/events/single/${e.event_id}`)}>
+                <p onClick={()=>window.location.replace(`${URLF}events/single/${e.event_id}`)}>
                 Event Title : {e.title}</p>
                 <img src={`${e.image_url}`} style={{width: '80vw', height: '50vh'}}/>
                 <p>Description: {e.description}</p>

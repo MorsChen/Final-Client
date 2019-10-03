@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const URLB = process.env.REACT_APP_BACKEND_URL
+const URLF = process.env.REACT_APP_FRONTEND_URL
 export default class Login extends Component {
     constructor() {
         super();
@@ -34,7 +35,7 @@ export default class Login extends Component {
             this.sendToken(data.token)
             localStorage.setItem('token', data.token)
     
-            return window.location.replace(`http://localhost:3000/`);
+            return window.location.replace(`${URLF}`);
         }
             else {return alert('something wrong')}
         };
@@ -93,7 +94,7 @@ export default class Login extends Component {
                     </button><br/>
                     <button
                     className="btn btn-primary"
-                    onClick = {()=>window.location.replace(`${URL}`)}
+                    onClick = {()=>window.location.replace(`${URLF}`)}
                     >
                     Login with facebook
                     </button>

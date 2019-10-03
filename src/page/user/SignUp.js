@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const URLB = process.env.REACT_APP_BACKEND_URL
+const URLF = process.env.REACT_APP_FRONTEND_URL
 export default class Signup extends Component {
     constructor() {
         super();
@@ -57,7 +58,7 @@ export default class Signup extends Component {
                 this.setState({
                     user: data.user,
                 })
-               return window.location.replace(`http://localhost:3000/`);
+               return window.location.replace(`${URLF}`);
             }
             else return alert('something wrong') 
         }

@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { es } from "date-fns/esm/locale";
 
 const URLB = process.env.REACT_APP_BACKEND_URL
+const URLF = process.env.REACT_APP_FRONTEND_URL
 class EventAdd extends React.Component {
     constructor() {
         super();
@@ -28,7 +29,7 @@ class EventAdd extends React.Component {
         const user = this.props.user
         if (user.isSignin !== true) {
             alert("Please login");
-            return window.location.replace(`http://localhost:3000/login/`)
+            return window.location.replace(`${URLF}login/`)
         }
         else {
             let newevent = {
@@ -50,7 +51,7 @@ class EventAdd extends React.Component {
             });
             const data = await response.json()
             if (data.status === 200) {  
-               return window.location.replace(`http://localhost:3000/events/`);}
+               return window.location.replace(`${URLF}events/`);}
             else {return alert('something wrong')}
             
             
@@ -197,7 +198,7 @@ class DelEvent extends Component {
             });
         const data = await resp.json()
         if (data.status = 200){
-            return window.location.replace(`http://localhost:3000/events`)}
+            return window.location.replace(`${URLF}events`)}
         else {return alert('something wrong')}
         }
     render (){ return []}
@@ -241,7 +242,7 @@ class EditEvent extends React.Component {
         const i = this.state.event
         if (this.state.user.isSignin !== true) {
             alert("Please login");
-            return window.location.replace(`http://localhost:3000/login/`)
+            return window.location.replace(`${URLF}login/`)
         }
         else {
             const newevent = {
@@ -263,7 +264,7 @@ class EditEvent extends React.Component {
             });
             const data = await response.json()
             if (data.status === 200) {  
-               return window.location.replace(`http://localhost:3000/events/single/${id}`);}
+               return window.location.replace(`${URLF}events/single/${id}`);}
             else {return alert('something wrong')}
             
             

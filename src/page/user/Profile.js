@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const URLB = process.env.REACT_APP_BACKEND_URL
+const URLF = process.env.REACT_APP_FRONTEND_URL
 class Profile extends Component {
     constructor(props) {
         super(props);
@@ -49,8 +50,8 @@ class Profile extends Component {
         return [
             <div className="FullContent">
                 <h3>PROFILE</h3>
-                {this.state.isUserinfo ? <><button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/profile/edit/`)}>Edit Profile</button></> : 
-                <><button className="btn btn-primary" onClick={()=> window.location.replace(`http://localhost:3000/profile/create/`)}>Create Profile</button>
+                {this.state.isUserinfo ? <><button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}profile/edit/`)}>Edit Profile</button></> : 
+                <><button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}profile/create/`)}>Create Profile</button>
                 </>}
                 
                 {this.state.isUserinfo ? <> {this.state.isLoaded ? <> <p>User Name : {this.state.userinfo.username}</p>
@@ -92,7 +93,7 @@ class EditProfile extends React.Component {
         e.preventDefault();
         if (this.state.user.isSignin !== true) {
             alert("Please login");
-            return window.location.replace(`http://localhost:3000/login/`)
+            return window.location.replace(`${URLF}login/`)
         }
         else {
             let editprofile = {
@@ -118,7 +119,7 @@ class EditProfile extends React.Component {
             });
             const data = await response.json()
             if (data.status === 200) {  
-               return window.location.replace(`http://localhost:3000/users/profile/`);}
+               return window.location.replace(`${URLF}users/profile/`);}
             else {return alert('something wrong')}
             
             
@@ -306,7 +307,7 @@ class CreateProfile extends React.Component {
         e.preventDefault();
         if (this.state.user.isSignin !== true) {
             alert("Please login");
-            return window.location.replace(`http://localhost:3000/login/`)
+            return window.location.replace(`${URLF}login/`)
         }
         else {
             let newprofile = {
@@ -331,7 +332,7 @@ class CreateProfile extends React.Component {
             });
             const data = await response.json()
             if (data.status === 200) {  
-               return window.location.replace(`http://localhost:3000/users/profile/`);}
+               return window.location.replace(`${URLF}users/profile/`);}
             else {return alert('something wrong')}
             
             
