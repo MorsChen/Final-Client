@@ -43,6 +43,7 @@ export default class App extends React.Component {
       profiles: {},
       comments: {},
       news: {},
+      users:[],
       token: existingToken || accessToken,
       user:{isSignin: false},
     }
@@ -50,7 +51,7 @@ export default class App extends React.Component {
   }
   
   componentDidMount() {
-    // this.fetchhome()
+    this.fetchhome()
     this.fetchUser()
   }
   fetchhome = async () => {
@@ -60,9 +61,11 @@ export default class App extends React.Component {
       }
     })
     const b = await a.json()
+    console.log('check B in 64 app', b)
     if (b.status === 200) {
-      this.setState({events:b.event, isLoaded: true})
+      this.setState({users:b.users, isLoaded: true})
     }
+    console.log('check users', this.state.users)
   }
   
   fetchUser= async() =>{
@@ -89,6 +92,7 @@ export default class App extends React.Component {
   
   render() {
     console.log("check token from app", this.state.user)
+    console.log('check users', this.state.users)
     return (
       <div className="App">
         <Router>
@@ -96,7 +100,7 @@ export default class App extends React.Component {
             
   
           <div className="mag-top">
-          <Route path="/" exact component={Home}/>
+          <Route path="/" exact component={ (props) => <Home {...props} user = {this.state.user} users = {this.state.users}/>}/>
             <Route path="/events/" exact component={ (props) => <Events {...props} user = {this.state.user} />} />
             
             <Route path="/profile/" exact component={ (props) => {if(this.state.user.isSignin === true) { 

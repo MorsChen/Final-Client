@@ -2,14 +2,44 @@ import React, { Component } from "react";
 import { Carousel, Container, Row } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// const URLB = process.env.REACT_APP_BACKEND_URL
-// const URLF = process.env.REACT_APP_FRONTEND_URL
+import Moment from 'react-moment';
+import 'moment-timezone';
+
+const URLB = process.env.REACT_APP_BACKEND_URL
+const URLF = process.env.REACT_APP_FRONTEND_URL
 export default class Hone extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {...props, isLoaded : false, isUserinfo: true};
+    console.log("check props home", this.props.users)
+  }
+
   render() {
+    
+    // const u = this.state.users
+    console.log('check events in users inside homepage', this.state.users)
+    
     return (
       <div>
         <Carousel>
-          <Carousel.Item>
+        {this.state.users.length  > 0 && this.state.users.map((u)=> {if ( u.events.length > 0 ){
+              return <Carousel.Item>
+              <img
+                className="d-block w-100 slider"
+                src={`${u.events[0].image_url}`}
+                alt="First slide"
+              />
+              <Carousel.Caption>
+                <h1>{u.events[0].title}</h1>
+                <h3 className="text-h3-card">{u.events[0].description}</h3>
+                <p>Owner : {u.events[0].username}</p>
+                <p>Time Start : <Moment date={u.events[0].datetimestart}/></p>
+              </Carousel.Caption>
+            </Carousel.Item>
+             }
+             })}
+
+          {/* <Carousel.Item>
             <img
               className="d-block w-100 slider"
               src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
@@ -47,7 +77,7 @@ export default class Hone extends Component {
                 Praesent commodo cursus magna, vel scelerisque nisl consectetur.
               </p>
             </Carousel.Caption>
-          </Carousel.Item>
+          </Carousel.Item> */}
         </Carousel>
       
         <Container className="content">
@@ -100,7 +130,7 @@ export default class Hone extends Component {
         </Container>
       
       
-        <Container>
+        {/* <Container>
           <Row className="card-tab justify-content-md-center">
             <div xs lg="2" class="card1 col m-2">
               <img src="http://www.pngmart.com/files/5/Pyramids-PNG-HD.png" alt="" />
@@ -139,9 +169,13 @@ export default class Hone extends Component {
           </Row>
         </Container>
       
-      
+       */}
         <div className="test-div row">
           <div>
+            {this.state.users.length  > 0 && this.state.users.map((u)=> {if ( u.events.length > 0 ){
+              return <p>{u.events[0].username}</p>
+             }
+             })}
             <p>
               The Egyptian pyramids are ancient pyramid-shaped masonry structures
               located in Egypt. As of November 2008, sources cite either 118 or 138 as
