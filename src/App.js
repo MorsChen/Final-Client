@@ -87,6 +87,7 @@ export default class App extends React.Component {
   }
   
   render() {
+    console.log("check token from app", this.state.user.token)
     return (
       <div className="App">
         <Router>

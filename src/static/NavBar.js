@@ -11,6 +11,7 @@ export default class NavBar extends React.Component {
       }
 
   render () {
+    console.log("check token from navbar", this.state.user.token)
       return [
           <Navbar bg="light" expand="lg">
           <Link class="navbar-brand" to="/">ART NOTE</Link>
