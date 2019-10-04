@@ -84,6 +84,7 @@ export default class App extends React.Component {
       b.user.isSignin= true;
       b.user.token = this.state.token
       this.setState({isloading:true,user:b.user})
+      return window.location.replace(`${URLF}`)
     }
   }
 
