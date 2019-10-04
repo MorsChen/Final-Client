@@ -92,6 +92,10 @@ export default class App extends React.Component {
       this.setState({isloading:true,user:b.user})
       return window.location.replace(`${URLF}`)
     }
+    else {
+      this.setState({user:b.user})
+      
+    }
   }
 
   getToken = (token) => {
