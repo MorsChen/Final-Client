@@ -78,6 +78,7 @@ export default class App extends React.Component {
     if (b.status === 200) {
       this.setState({isloading:true,user:b.user})
     }
+    console.log('check isSignin', this.state.user)
   }
 
   getToken = (token) => {
