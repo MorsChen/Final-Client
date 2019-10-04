@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route} from "react-router-dom";
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -29,9 +29,7 @@ export default class App extends React.Component {
     super(props);
     const existingToken = localStorage.getItem('token');
     const accessToken = (window.location.search.split("=")[0]==="?api_key") ? window.location.search.split("=")[1] : null;
-    if (!accessToken && !existingToken){
-        window.location.replace(`${URLF}`)
-    };
+
 
     if (accessToken) {
         localStorage.setItem('token', accessToken);
@@ -46,13 +44,13 @@ export default class App extends React.Component {
       comments: {},
       news: {},
       token: existingToken || accessToken,
-      user:{isSignin:false},
+      user:{isSignin: false},
     }
     
   }
   
   componentDidMount() {
-    this.fetchhome()
+    // this.fetchhome()
     this.fetchUser()
   }
   fetchhome = async () => {
@@ -68,17 +66,20 @@ export default class App extends React.Component {
   }
   
   fetchUser= async() =>{
+    const token = this.state.token
     const a = await fetch(`${URLB}getuserinfo`,{
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Token ${this.state.token}`
+        "Authorization": `Token ${token}`
       }
     })
     const b = await a.json()
     if (b.status === 200) {
-      this.setState({isloading:true,user:b.user})
+      b.user.isSignin = true
+      b.user.token = token
+      this.setState({isloading:true , user:b.user})
     }
-    console.log('check isSignin', this.state.user)
+    console.log("check user from backend", this.state.user)
   }
 
   getToken = (token) => {
@@ -87,7 +88,7 @@ export default class App extends React.Component {
   }
   
   render() {
-    console.log("check token from app", this.state.user.token)
+    console.log("check token from app", this.state.user)
     return (
       <div className="App">
         <Router>

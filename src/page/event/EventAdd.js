@@ -1,12 +1,12 @@
 import React, {Component} from "react";
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 import Moment from 'react-moment';
 import 'moment-timezone';
  
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { es } from "date-fns/esm/locale";
+// import { es } from "date-fns/esm/locale";
 
 const URLB = process.env.REACT_APP_BACKEND_URL
 const URLF = process.env.REACT_APP_FRONTEND_URL

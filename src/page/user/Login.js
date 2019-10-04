@@ -94,7 +94,7 @@ export default class Login extends Component {
                     </button><br/>
                     <button
                     className="btn btn-primary"
-                    onClick = {()=>window.location.replace(`${URLF}`)}
+                    onClick = {()=>window.location.replace(`${URLB}login/facebook`)}
                     >
                     Login with facebook
                     </button>

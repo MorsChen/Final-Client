@@ -7,11 +7,13 @@ export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {...props, isLoaded : false, isUserinfo: true};
-        console.log("check props navbar", this.state.user)
+        console.log("check props navbar", this.props.user)
+        console.log("check props render navbar", this.state.user)
       }
 
   render () {
-    console.log("check token from navbar", this.state.user.token)
+    console.log("check props render navbar", this.state.user)
+    console.log("check token from navbar", this.props.user.token)
       return [
           <Navbar bg="light" expand="lg">
           <Link class="navbar-brand" to="/">ART NOTE</Link>
