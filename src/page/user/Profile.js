@@ -413,7 +413,7 @@ class CreateProfile extends React.Component {
                     selected={this.state.birthday}
                     onChange={this.handleDate}
                     required={true}
-                    dateFormat="MM/dd/yyyy h:mm aa"
+                    dateFormat="MM/dd/yyyy"
                     />
                     </div>
 
