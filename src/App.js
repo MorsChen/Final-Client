@@ -29,17 +29,6 @@ export default class App extends React.Component {
     super(props);
     const existingToken = localStorage.getItem('token');
     const accessToken = (window.location.search.split("=")[0]==="?api_key") ? window.location.search.split("=")[1] : null;
-    this.state = {
-      isloading:true,
-      events: {},
-      blogs: {},
-      users: {},
-      profiles: {},
-      comments: {},
-      news: {},
-      user:{isSignin:false},
-    }
-
     if (!accessToken && !existingToken){
         window.location.replace(`${URLF}`)
     };
@@ -87,13 +76,7 @@ export default class App extends React.Component {
     })
     const b = await a.json()
     if (b.status === 200) {
-      b.user.isSignin= true;
-      b.user.token = this.state.token
       this.setState({isloading:true,user:b.user})
-    }
-    else {
-      this.setState({user:b.user})
-
     }
   }
 
