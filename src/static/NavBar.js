@@ -4,7 +4,11 @@ import { Navbar, Nav, NavDropdown} from "react-bootstrap";
 
 
 export default class NavBar extends React.Component {
-  
+    constructor(props) {
+        super(props);
+        this.state = {...props, isLoaded : false, isUserinfo: true};
+        console.log("check props navbar", this.state.user)
+      }
 
   render () {
       return [
