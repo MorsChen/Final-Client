@@ -57,20 +57,20 @@ export default class App extends React.Component {
   }
   
   componentDidMount() {
-    this.fetchhome()
+    // this.fetchhome()
     this.fetchUser()
   }
-  fetchhome = async () => {
-    const a = await fetch(`${URLB}`,{
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-    const b = await a.json()
-    if (b.status === 200) {
-      this.setState({events:b.event, isLoaded: true})
-    }
-  }
+  // fetchhome = async () => {
+  //   const a = await fetch(`${URLB}`,{
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     }
+  //   })
+  //   const b = await a.json()
+  //   if (b.status === 200) {
+  //     this.setState({events:b.event, isLoaded: true})
+  //   }
+  // }
   
   fetchUser= async() =>{
     const a = await fetch(`${URLB}getuserinfo`,{
