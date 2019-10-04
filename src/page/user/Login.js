@@ -35,7 +35,7 @@ export default class Login extends Component {
             this.sendToken(data.token)
             localStorage.setItem('token', data.token)
     
-            return window.location.replace(`${URLF}`);
+            return window.location.replace(`${URLF}profile`);
         }
             else {return alert('something wrong')}
         };
