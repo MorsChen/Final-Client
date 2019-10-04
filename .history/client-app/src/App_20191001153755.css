@@ -1,0 +1,225 @@
+.App {
+  text-align: center;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Exo:700');
+@import url('https://fonts.googleapis.com/css?family=Abel');
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.slider {
+  height: 100vh;
+  margin-top: -100px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  }
+
+.modal-footer {
+  background-color: #607a8a65;
+}
+
+.mag-top {
+  margin-top: 3.5rem;
+}
+
+
+.flip-card {
+  background-color: transparent;
+  width: 12rem;
+  height: 19rem;
+  perspective: 1000px;
+
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 12rem;
+  height: 19rem;
+  text-align: center;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 12rem;
+  height: 19rem;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-card-back {
+  background-color: #524221;
+  color: rgb(255, 189, 66);
+  transform: rotateY(180deg);
+}
+
+.FullContent {
+  display: flex;
+  width: 100vw;
+  height: 500px;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.form-content {
+  display: flex;
+  width: 80%;
+  margin-top: 2rem;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  height: auto;
+  justify-content: center;
+}
+.card-content {
+  display: flex;
+  width: 80%;
+  margin-top: 2rem;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.test-div{
+  display: flex;
+  width: 100%;
+  margin-top: 20rem;
+  /* height: 500px; */
+  color: black;
+}
+
+
+
+/* Stop------ */
+.card-tab {
+  background-color: #4201010e;
+  width: 100vw;
+  height: auto;
+  -webkit-transform: perspective(900px);
+  transform: perspective(900px);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  text-align:center;
+}
+
+.card-font {
+  font-family: 'Abel', sans-serif;
+  color: white;
+  text-align:center;
+  font-size:12px;
+  text-align: center;
+  transform: translatex(12px);
+}
+
+.text-h3-card {
+  font-size:25px;
+  font-family: 'Abel', sans-serif;
+  color:rgb(255,255,255);
+  text-shadow: 0 0 2px rgb(255,255,255);
+  transform: translatey(10px);
+}
+
+.card1 {
+  text-align:center;
+  width: 10em;
+  height: 350px;
+  margin: 1rem;
+  background: linear-gradient(rgb(225,150,58),rgb(227,144,91));
+  transition:.6s;
+  
+  transform: rotatex(75deg) translatey(-200px) translatez(-100px);
+  box-shadow: 0px 20px 60px rgba(0,0,0, 0.5);
+}
+.card1:hover{
+  transform: rotatex(0deg);
+  transition:.6s;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+.card1 img{
+  transform: translateY(1rem);
+  width: 10em;
+  height:120px;
+}
+
+.card2 {
+  text-align:center;
+  width: 10rem;
+  height: 350px;
+  margin: 1rem;
+  background: linear-gradient(rgb(93,94,170),rgb(93,66,103));
+  animation: animate 1s linear infinite;
+  transition:.6s;
+  
+  transform: rotatex(75deg) translatey(-200px) translatez(-100px);
+  box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.5);
+}
+.card2:hover{
+  transform: rotatex(0deg);
+  transition:.6s;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+.card2 img{
+  transform: translateY(1rem);
+  width: 10em;
+  height:150px;
+}
+.card3 {
+  text-align:center;
+  width: 10em;
+  height: 350px;
+  margin: 1rem;
+  background: linear-gradient(#ff5252, #b33939);
+  transition:.6s;
+  
+  transform: rotatex(75deg) translatey(-200px) translatez(-100px);
+  box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.5);
+}
+.card3:hover{
+  transform: rotatex(0deg);
+  transition:.6s;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+.card3 img{
+  transform: translateY(1rem);
+  width: 10em;
+  height:120px;
+}
