@@ -39,93 +39,31 @@ export default class Hone extends Component {
              }
              })}
 
-          {/* <Carousel.Item>
-            <img
-              className="d-block w-100 slider"
-              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-              alt="First slide"
-            />
-            <Carousel.Caption>
-              <h1>HOME</h1>
-              <h3 className="text-h3-card">First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 slider"
-              src="https://images.unsplash.com/photo-1506701160839-34cfdecaf53c?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ"
-              alt="Third slide"
-            />
-            <Carousel.Caption>
-              <h1>HOME</h1>
-              <h3 className="text-h3-card">Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 slider"
-              src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-              alt="Third slide"
-            />
-      
-            <Carousel.Caption>
-              <h1>HOME</h1>
-              <h3 className="text-h3-card">Third slide label</h3>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
-            </Carousel.Caption>
-          </Carousel.Item> */}
+         
         </Carousel>
       
         <Container className="content">
           <Row className="card-content justify-content-md-center">
-            <div sm="{4}" class="flip-card col mt-1">
+
+          {this.state.users.length  > 0 && this.state.users.map((u)=> {if ( u.events.length > 0 ){
+              return <div sm="{4}" class="flip-card col mt-1">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
                   <img className="imgcard"
-                  src="https://images.unsplash.com/photo-1546538994-4f15d0aa966f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                  src={`${u.events[0].image_url}`}
                   alt="Avatar" style={{width: "12rem", height: "19rem"}}/>
                 </div>
-                <div class="flip-card-back">
-                  <h1>John Doe</h1>
+                <div class="flip-card-back" >
+                  <h1>{u.events[0].username}</h1>
                   <p>Architect & Engineer</p>
                   <p>We love that guy</p>
                 </div>
               </div>
             </div>
-      
-            <div sm="{4}" class="flip-card col mt-1">
-              <div class="flip-card-inner">
-                <div class="flip-card-front">
-                  <img className="imgcard"
-                  src="https://images.unsplash.com/photo-1546538994-4f15d0aa966f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                  alt="Avatar" style={{width: "12rem", height: "19rem"}}/>
-                </div>
-                <div class="flip-card-back">
-                  <h1>John Doe</h1>
-                  <p>Architect & Engineer</p>
-                  <p>We love that guy</p>
-                </div>
-              </div>
-            </div>
-      
-            <div sm="{4}" class="flip-card col mt-1">
-              <div class="flip-card-inner">
-                <div class="flip-card-front">
-                  <img className="imgcard"
-                  src="https://images.unsplash.com/photo-1546538994-4f15d0aa966f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                  alt="Avatar" style={{width: "12rem", height: "19rem"}}/>
-                </div>
-                <div class="flip-card-back">
-                  <h1>John Doe</h1>
-                  <p>Architect & Engineer</p>
-                  <p>We love that guy</p>
-                </div>
-              </div>
-            </div>
+              
+             }
+             })}
+            
           </Row>
         </Container>
       
@@ -170,8 +108,7 @@ export default class Hone extends Component {
         </Container>
       
        */}
-        <div className="test-div row">
-          <div>
+        {/* <div className="content">
             {this.state.users.length  > 0 && this.state.users.map((u)=> {if ( u.events.length > 0 ){
               return <p>{u.events[0].username}</p>
              }
@@ -181,17 +118,14 @@ export default class Hone extends Component {
               located in Egypt. As of November 2008, sources cite either 118 or 138 as
               the number of identified Egyptian pyramids.
             </p>
-          </div>
           <br />
-          <div>
             <p>
               The Egyptian pyramids are ancient pyramid-shaped masonry structures
               located in Egypt. As of November 2008, sources cite either 118 or 138 as
               the number of identified Egyptian pyramids.
             </p>
-          </div>
           <br />
-        </div>
+        </div> */}
       </div>
     
         
