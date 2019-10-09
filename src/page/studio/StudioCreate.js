@@ -10,16 +10,16 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const URLB = process.env.REACT_APP_BACKEND_URL
 const URLF = process.env.REACT_APP_FRONTEND_URL
-class EventAdd extends React.Component {
+class StudioCreate extends React.Component {
     constructor() {
         super();
         this.state = {
-            title: "",
+            name: "",
             description: "",
             image_url: "",
             address: "",
-            datetimestart: new Date(),
-            datetimeend: new Date(),
+            opentime: "",
+            closetime: "",
         };
 
       }
@@ -32,18 +32,18 @@ class EventAdd extends React.Component {
             return window.location.replace(`${URLF}login/`)
         }
         else {
-            let newevent = {
-            title: this.state.title,
+            let newstudio = {
+            name: this.state.name,
             description: this.state.description,
             image_url: this.state.image_url,
             address: this.state.address,
-            datetimestart: this.state.datetimestart,
-            datetimeend: this.state.datetimeend,
+            opentime: this.state.opentime,
+            closetime: this.state.closetime,
             };
             const token = this.props.user.token
-            const response = await fetch(`${URLB}events/add`, {
+            const response = await fetch(`${URLB}studios/add`, {
             method: "POST",
-            body: JSON.stringify(newevent),
+            body: JSON.stringify(newstudio),
             headers: new Headers({
                 "Content-Type": "application/json",
                 "Authorization": `Token ${token}`
@@ -51,7 +51,7 @@ class EventAdd extends React.Component {
             });
             const data = await response.json()
             if (data.status === 200) {  
-               return window.location.replace(`${URLF}events/`);}
+               return window.location.replace(`${URLF}studios/`);}
             else {return alert('something wrong')}
             
             
@@ -66,17 +66,7 @@ class EventAdd extends React.Component {
         });
         
     };
-    handleDateStart = date => {
-        this.setState({
-            datetimestart: date
-        });
-    };
-    handleDateEnd = date => {
-        this.setState({
-            datetimeend: date
-        });
-    };
-
+   
     render() {
         return (
             <div className="container">
@@ -88,15 +78,15 @@ class EventAdd extends React.Component {
                     onChange={e => this.handleChange(e)}
                 >
                     <div className="form-group">
-                    <h1 style={{ textAlign: "center" }}>Create Event</h1>
+                    <h1 style={{ textAlign: "center" }}>Create Studio</h1>
                     </div>
                     <div className="form-group">
-                    <label for="exampleFormControlInput1">Title</label>
+                    <label for="exampleFormControlInput1">Name</label>
                     <input
                         type="text"
-                        name="title"
+                        name="name"
                         className="form-control"
-                        placeholder="Enter new title"
+                        placeholder="Enter your studio name"
                         autoFocus
                         required={true}
                     /></div>
@@ -136,28 +126,32 @@ class EventAdd extends React.Component {
                     /></div>
         
                     <div className="form-group">
-                    <label for="exampleFormControlInput1">Time Start</label>
-                    <DatePicker
-                    selected={this.state.datetimestart}
-                    onChange={this.handleDateStart}
-                    required={true}
-                    dateFormat="MM/dd/yyyy h:mm aa"
+                    <label for="exampleFormControlInput1">Open At</label>
+                    <input
+                        type="text"
+                        name="opentime"
+                        className="form-control"
+                        placeholder="Open Time HH:MM"
+                        autoFocus
+                        required={true}
                     /></div>
 
                     <div className="form-group">
-                    <label for="exampleFormControlInput1">Time End</label>
-                    <DatePicker
-                    selected={this.state.datetimeend}
-                    onChange={this.handleDateEnd}
-                    required={true}
-                    dateFormat="MM/dd/yyyy h:mm aa"
+                    <label for="exampleFormControlInput1">Closed At</label>
+                    <input
+                        type="text"
+                        name="closetime"
+                        className="form-control"
+                        placeholder="Closed Time HH:MM"
+                        autoFocus
+                        required={true}
                     /></div>
 
                     <button
                     type="submit"
                     className="btn btn-primary"
                     >
-                    Create Event
+                    Create Studio
                     </button>
                 </form>
                 </div>
@@ -169,17 +163,17 @@ class EventAdd extends React.Component {
     }
 }
 
-class DelEvent extends Component {
+class DelStudio extends Component {
     constructor(props) {
         super(props);
         this.state = {...props,
             isSignin: false,
-            title: this.state.title,
+            name: this.state.name,
             description: this.state.description,
             image_url: this.state.image_url,
             address: this.state.address,
-            datetimestart: new Date(),
-            datetimeend: new Date(), 
+            opentime: this.state.opentime,
+            closetime: this.state.closetime, 
         };
       }
     componentDidMount(){
@@ -189,7 +183,7 @@ class DelEvent extends Component {
     getprofile = async() => {
         const token = this.state.user.token
         const id = this.state.id
-        const resp = await fetch(`${URLB}events/delete/${id}`, {
+        const resp = await fetch(`${URLB}studios/delete/${id}`, {
             method: "GET",
             headers: ({
                 "Content-Type": "application/json",
@@ -198,28 +192,27 @@ class DelEvent extends Component {
             });
         const data = await resp.json()
         if (data.status = 200){
-            return window.location.replace(`${URLF}events`)}
+            return window.location.replace(`${URLF}studios`)}
         else {return alert('something wrong')}
         }
     render (){ return []}
     }
 
 
-class EditEvent extends React.Component {
+class EditStudio extends React.Component {
     constructor(props) {
         super(props);
         this.state = {...props, isLoaded : false, 
-            isEventInfo: true, 
-            datetimestart: '',
-            datetimeend: ''};
+            isStudioInfo: true, 
+           };
       }
     componentDidMount(){
-        this.geteventtoedit()
+        this.getstudio()
     }
-    geteventtoedit = async() => {
+    getstudio = async() => {
         const token = this.state.user.token
         const id = this.state.id
-        const resp = await fetch(`${URLB}events/single/${id}`, {
+        const resp = await fetch(`${URLB}studios/single/${id}`, {
             method: "GET",
             headers: ({
                 "Content-Type": "application/json",
@@ -228,9 +221,9 @@ class EditEvent extends React.Component {
             });
         const data = await resp.json()
         if (data.status = 200){
-            if (data.event === null){
-                this.setState({isEventInfo: false})}
-                else{this.setState({ event: data.event,
+            if (data.studio === null){
+                this.setState({isStudioInfo: false})}
+                else{this.setState({ studio: data.studio,
                     isLoaded: true,
                 });}
         }
@@ -239,24 +232,24 @@ class EditEvent extends React.Component {
     handleRegister = async e => {
         const id = this.state.id
         e.preventDefault();
-        const i = this.state.event
+        const i = this.state.studio
         if (this.state.user.isSignin !== true) {
             alert("Please login");
             return window.location.replace(`${URLF}login/`)
         }
         else {
-            const newevent = {
-            title: this.state.title || i.title,
+            const newstudio = {
+            name: this.state.name || i.name,
             description: this.state.description || i.description,
             image_url: this.state.image_url || i.image_url,
             address: this.state.address || i.address,
-            datetimestart: this.state.datetimestart || i.datetimestart,
-            datetimeend: this.state.datetimeend || i.datetimeend,
+            opentime: this.state.opentime || i.opentime,
+            closetime: this.state.closetime || i.closetime,
             };
             const token = this.props.user.token
-            const response = await fetch(`${URLB}events/edit/${id}`, {
+            const response = await fetch(`${URLB}studios/edit/${id}`, {
             method: "POST",
-            body: JSON.stringify(newevent),
+            body: JSON.stringify(newstudio),
             headers: new Headers({
                 "Content-Type": "application/json",
                 "Authorization": `Token ${token}`
@@ -264,11 +257,8 @@ class EditEvent extends React.Component {
             });
             const data = await response.json()
             if (data.status === 200) {  
-               return window.location.replace(`${URLF}events/single/${id}`);}
+               return window.location.replace(`${URLF}studios/single/${id}`);}
             else {return alert('something wrong')}
-            
-            
-            
         }
         };
     handleChange = e => {
@@ -280,24 +270,8 @@ class EditEvent extends React.Component {
         
     };
 
-    updateInputValue(e) {
-        const { target: {value} } = e;
-        this.setState({ recipeName: value });
-     }
-
-    handleDateStart = date => {
-        this.setState({
-            datetimestart: date
-        });
-    };
-    handleDateEnd = date => {
-        this.setState({
-            datetimeend: date
-        });
-    };
-
     render() {
-        const e = this.state.event
+        const e = this.state.studio
         return (
             <div className="container">
             <div className="jumbotron jumbotron-fluid custome-jumbo">
@@ -308,17 +282,17 @@ class EditEvent extends React.Component {
                     onChange={e => this.handleChange(e)}
                 >
                     <div className="form-group">
-                    <h1 style={{ textAlign: "center" }}>Edit Event</h1>
+                    <h1 style={{ textAlign: "center" }}>Edit your Studio</h1>
                     </div>
-                    {this.state.isEventInfo ? <> {this.state.isLoaded ? <>
+                    {this.state.isStudioInfo ? <> {this.state.isLoaded ? <>
                     
                     <div className="form-group">
-                    <label for="exampleFormControlInput1">Title</label>
-                    <p>Title: {e.title}</p>
+                    <label for="exampleFormControlInput1">Studio Name</label>
+                    <p>Name: {e.name}</p>
                     <input
                         type="text"
-                        name="title"
-                        defaultValue = {e.title}
+                        name="name"
+                        defaultValue = {e.name}
                         className="form-control"
                         autoFocus
                         required={true}
@@ -362,24 +336,27 @@ class EditEvent extends React.Component {
                     /></div>
         
                     <div className="form-group">
-                    <label for="exampleFormControlInput1">Time Start</label>
-                    <p>Date-Start: <Moment date={e.datetimestart} /></p>
-                    <DatePicker
-                    selected={this.state.datetimestart}
-                    onChange={this.handleDateStart}
-                    // required={true}
-                    
-                    dateFormat="MM/dd/yyyy h:mm aa"
+                    <label for="exampleFormControlInput1">Open At</label>
+                    <p>Open_At: {e.opentime}</p>
+                    <input
+                        type="text"
+                        name="opentime"
+                        className="form-control"
+                        defaultValue = {e.opentime}
+                        autoFocus
+                        required={true}
                     /></div>
 
                     <div className="form-group">
-                    <label for="exampleFormControlInput1">Time End</label>
-                    <p>Date-End: <Moment date={e.datetimeend} /></p>
-                    <DatePicker
-                    selected={this.state.datetimeend}
-                    onChange={this.handleDateEnd}
-                    // required={true}
-                    dateFormat="MM/dd/yyyy h:mm aa"
+                    <label for="exampleFormControlInput1">Closed At</label>
+                    <p>Closed_At: {e.closetime}</p>
+                    <input
+                        type="text"
+                        name="closetime"
+                        className="form-control"
+                        defaultValue = {e.closetime}
+                        autoFocus
+                        required={true}
                     /></div>
                     <p> Created At: <Moment date={e.created} /> </p><br/>
 
@@ -400,5 +377,5 @@ class EditEvent extends React.Component {
         );
     }
 }
-export default EventAdd
-export {EditEvent,DelEvent}
+export default StudioCreate
+export {EditStudio,DelStudio}

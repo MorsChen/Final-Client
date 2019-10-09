@@ -4,20 +4,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const URLB = process.env.REACT_APP_BACKEND_URL
 const URLF = process.env.REACT_APP_FRONTEND_URL
-class Events extends React.Component {
+class Studios extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {...props, isLoaded: false, isEventInfo: true};
+        this.state = {...props, isLoaded: false, isStudioInfo: true};
         console.log("check props Events", this.state)
         console.log("check props user isSignin", this.state.user.isSignin)
       }
 
       componentDidMount(){
-        this.getevents()
+        this.getStudios()
     }
 
-    getevents = async() => {
-        const resp = await fetch(`${URLB}events/`, {
+    getStudios = async() => {
+        const resp = await fetch(`${URLB}studios/`, {
             method: "GET",
             headers: ({
                 "Content-Type": "application/json",
@@ -25,9 +25,9 @@ class Events extends React.Component {
             });
         const data = await resp.json()
         if (data.status = 200){
-            if (data.event === null){
-                this.setState({isEventInfo: false})}
-            else{this.setState({ events: data.event,
+            if (data.studio === null){
+                this.setState({isStudioInfo: false})}
+            else{this.setState({ studios: data.studio,
                 isLoaded: true,
             });
         }
@@ -37,32 +37,32 @@ class Events extends React.Component {
     render(){
         return [
             <div className="FullContent">
-                <h3>Event List</h3>
-                {this.state.isEventInfo ? <>
+                <h3>Studios List</h3>
+                {this.state.isStudioInfo ? <>
                 </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/add`)}>Create Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}studios/add`)}>Create Studio</button>
                 </>}
                 {this.state.user.isSignin ? <>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/add`)}>Create Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}studios/add`)}>Create Studio</button>
                 </>:<></>}
                 
-                {this.state.isEventInfo ? <> {this.state.isLoaded ? <> {this.state.events && 
-                this.state.events.map( e=>{ 
+                {this.state.isStudioInfo ? <> {this.state.isLoaded ? <> {this.state.studios && 
+                this.state.studios.map( e=>{ 
                 return (
                 <div className='event-contain'>
                 {e.owner_id !== this.state.user.id ? <>
                 </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/edit/${e.event_id}`)}>Edit Event</button>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/delete/${e.event_id}`)}>Delete Event</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}studios/edit/${e.studio_id}`)}>Edit Studio</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}studios/delete/${e.studio_id}`)}>Delete Studio</button>
                 </>}
                 
-                <p onClick={()=>window.location.replace(`${URLF}events/single/${e.event_id}`)}>
-                Event Title : {e.title}</p>
+                <p onClick={()=>window.location.replace(`${URLF}studios/single/${e.studio_id}`)}>
+                Studio's name : {e.name}</p>
                 <img src={`${e.image_url}`} style={{width: '80vw', height: '50vh'}}/>
                 <p>Description: {e.description}</p>
                 <p>Address: {e.address}</p>
-                <p>Time Start : {e.datetimestart}</p>
-                <p>Time End : {e.datetimeend}</p>
+                <p>Open_At : {e.opentime}</p>
+                <p>Closed_At : {e.closetime}</p>
                 <p>Views : {e.views}</p>
                 <p>Created : {e.created}</p>
                 <p>Updated : {e.updated}</p>
@@ -76,4 +76,4 @@ class Events extends React.Component {
 
 }
 
-export default Events
+export default Studios

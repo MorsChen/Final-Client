@@ -6,15 +6,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
-import Home from "./page/user/Home";
+import Home from "./page/Home";
 import SignUp from "./page/user/SignUp";
 import Login from "./page/user/Login";
 import Logout from "./page/user/Logout";
 import Profile, {EditProfile, CreateProfile} from "./page/user/Profile";
 import NavBar from "./static/NavBar";
+
 import Events from "./page/event/Events";
 import EventAdd, {EditEvent, DelEvent} from "./page/event/EventAdd";
 import EventList, { SingleEvent } from "./page/event/EventList";
+
+import Posts from "./page/post/Posts";
+import PostAdd, {EditPost, DelPost} from "./page/post/PostAdd";
+import PostList, { SinglePost } from "./page/post/PostList";
+
+import Studios from "./page/studio/Studios";
+import StudioCreate, {EditStudio, DelStudio} from "./page/studio/StudioCreate";
+import StudioList, { SingleStudio } from "./page/studio/StudioList";
+
+import Courses from "./page/course/Courses";
+import CourseAdd, {EditCourse, DelCourse} from "./page/course/CourseAdd";
+import CoursesList, { SingleCourse } from "./page/course/CoursesList";
 
 
 
@@ -38,7 +51,7 @@ export default class App extends React.Component {
     this.state = {
       isloading:true,
       events: {},
-      blogs: {},
+      posts: {},
       users: {},
       profiles: {},
       comments: {},
@@ -100,8 +113,11 @@ export default class App extends React.Component {
             
   
           <div className="mag-top">
-          <Route path="/" exact component={ (props) => <Home {...props} user = {this.state.user} users = {this.state.users}/>}/>
+            <Route path="/" exact component={ (props) => <Home {...props} user = {this.state.user} users = {this.state.users}/>}/>
+            <Route path="/studios/" exact component={ (props) => <Studios {...props} user = {this.state.user} />} />
             <Route path="/events/" exact component={ (props) => <Events {...props} user = {this.state.user} />} />
+            <Route path="/posts/" exact component={ (props) => <Posts {...props} user = {this.state.user} />} />
+            <Route path="/courses/" exact component={ (props) => <Courses {...props} user = {this.state.user} />} />
             
             <Route path="/profile/" exact component={ (props) => {if(this.state.user.isSignin === true) { 
               return <Profile {...props} user = {this.state.user}/>
@@ -137,9 +153,56 @@ export default class App extends React.Component {
                 return <DelEvent {...props} user = {this.state.user} id = {props.match.params.id} />
                 }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
 
-            <Route path="/studio/" exact component={Studio} />
+            <Route path="/posts/add" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <PostAdd {...props} user = {this.state.user} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/posts/list" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <PostList {...props} user = {this.state.user} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/posts/single/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <SinglePost {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/posts/edit/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <EditPost {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/posts/delete/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <DelPost {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+
+            <Route path="/studios/add" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <StudioCreate {...props} user = {this.state.user} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/studios/list" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <StudioList {...props} user = {this.state.user} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/studios/single/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <SingleStudio {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/studios/edit/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <EditStudio {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/studios/delete/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <DelStudio {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+
+            <Route path="/courses/add" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <CourseAdd {...props} user = {this.state.user} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/courses/list" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <CoursesList {...props} user = {this.state.user} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/courses/single/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <SingleCourse {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/courses/edit/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <EditCourse {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/courses/delete/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <DelCourse {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+
+            
             <Route path="/workshop/" component={Workshop} />
-            <Route path="/courses/" component={Courses} />
             <Route path="/about/" component={About} />
           </div>
   
@@ -151,16 +214,8 @@ export default class App extends React.Component {
  
 }
 
-function Studio() {
-  return <div className="FullContent"> Studio </div>;
-}
-
 function Workshop() {
   return <div className="FullContent"> Workshop </div>;
-}
-
-function Courses() {
-  return <div className="FullContent"> Courses </div>;
 }
 
 function About() {

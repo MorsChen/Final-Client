@@ -20,8 +20,84 @@ export default class Hone extends Component {
     console.log('check events in users inside homepage', this.state.users)
     
     return (
-      <div>
-        <Carousel>
+      <div className="FullContent">
+        <div className="container1">
+          <div className='home-content'>
+          <h1 className="home-title">ART NOTE</h1>
+          <div clasName="des-containner">
+            <h5 className="home-description">Training for individuals or research and development companies specializing in Digital Art, Illustration and Concept Art.
+            Provides lessons and quality training from teachers with years of experience in the art of Game and Film.
+            </h5>
+          </div>
+          </div>
+        </div>
+
+        <div className="container2">
+            <div className="ctn2-content">
+              <h5 className="ctn2-title">INTRODUCTION</h5>
+              <div className="ctn2-body">
+                <h7>Currently, Digital Art, Illustration and Concept Art are one of the dynamic creative groups in Vietnam as well as in the world. Few will think that their daily job is to draw and create fantasy characters and landscapes for Games, Book Illustrations and Movies. But that is the main work of Concept Artists, Ilustration Artists and Digital Artists - those who bring soul into entertainment products.</h7><br/>
+                <h7>Art Note was born with the goal of being a class specializing in Concept Art, Illustration and Digital Art training to introduce and orient the industry, improving both quantity and quality for future artists. Or simply, it helps you to firmly pursue your passion for drawing for Games, Illustrations and Movies. We are just a small class, what we bring to you is the knowledge and skills to get ready for the job, we do not award any courses.</h7>
+              </div>
+            </div>
+            <div className="ctn2-content2">
+              <div className="ctn2-secsion">
+              <h5 className="ctn2-title">COURSE PROGRAM</h5>
+              <div className="ctn2-body2">
+                <h7>Art Note is one of the first classes in Saigon to teach Digital Art and Concept Art, and each course will only take a maximum of ten friends. Because our goal is to guide carefully, depending on your ability to help develop drawing and design skills for each student.</h7>
+              </div>
+              </div>
+              <div className="ctn2-secsion">
+              <h5 className="ctn2-title">KNOWLEDGE</h5>
+              <div className="ctn2-body2">
+                <h7>The curriculum is compiled based on the knowledge and materials from the famous drawing and design training schools in the world. Help you master the background knowledge, drawing skills, improve eye aesthetics, design thinking as well as teamwork.</h7>
+              </div>
+              </div>
+            </div>
+            <div className="ctn2-content2">
+              <div className="ctn2-secsion">
+              <h5 className="ctn2-title">STUDY ENVIRONMENT</h5>
+              <div className="ctn2-body2">
+                <h7>The teachers are experienced, happy and open-minded. Classroom atmosphere is always comfortable, friendly and high learning spirit.
+                    After school, students can study together on Art Note and participate in extracurricular activities organized by Art Note.</h7>
+              </div>
+              </div>
+              <div className="ctn2-secsion">
+              <h5 className="ctn2-title">VOCATION</h5>
+              <div className="ctn2-body2">
+                <h7>The study program is close to the real job. Students before and after studying are consulted carefully to have career orientation appropriate to their interests. Many of you have found the job you want and apply your knowledge to the job.</h7>
+              </div>
+              </div>
+            </div>
+        </div>
+
+        <div className="container3">
+        <div className="bgimg">
+          <div className="transbox">
+            <h3 className="contact">CONTACT</h3>
+            <div>
+
+            </div>
+            <div className="contact-adds">
+              <h5 className='contact-info'>
+                ĐIỆN THOẠI:  0963.730.615
+                Art Soup - Workshop, 124/7 Xô Viết Nghệ Tĩnh,
+                Phường 21, Quận Bình Thạnh, TP. Hồ Chí Minh</h5>
+            </div>
+          </div>
+        </div>
+          <div className="bggif">
+
+          </div>
+          
+        </div>
+        <div>
+
+        </div>
+        
+
+
+        {/* <Carousel>
         {this.state.users.length  > 0 && this.state.users.map((u)=> {if ( u.events.length > 0 ){
               return <Carousel.Item>
               <img
@@ -40,9 +116,9 @@ export default class Hone extends Component {
              })}
 
          
-        </Carousel>
+        </Carousel> */}
       
-        <Container className="content">
+        {/* <Container className="content">
           <Row className="card-content justify-content-md-center">
 
           {this.state.users.length  > 0 && this.state.users.map((u)=> {if ( u.events.length > 0 ){
@@ -65,7 +141,7 @@ export default class Hone extends Component {
              })}
             
           </Row>
-        </Container>
+        </Container> */}
       
       
         {/* <Container>
@@ -126,6 +202,7 @@ export default class Hone extends Component {
             </p>
           <br />
         </div> */}
+        
       </div>
     
         
