@@ -332,7 +332,7 @@ class CreateProfile extends React.Component {
             });
             const data = await response.json()
             if (data.status === 200) {  
-               return window.location.replace(`${URLF}/profile/`);}
+               return window.location.replace(`${URLF}profile/`);}
             else {return alert('something wrong')}
             
             
