@@ -79,10 +79,10 @@ export default class Hone extends Component {
 
             </div>
             <div className="contact-adds">
-              <h5 className='contact-info'>
-                ĐIỆN THOẠI:  0963.730.615
-                Art Soup - Workshop, 124/7 Xô Viết Nghệ Tĩnh,
-                Phường 21, Quận Bình Thạnh, TP. Hồ Chí Minh</h5>
+              <h5 className='contact-info'>Phone:  0963.730.615</h5>
+              <h5 className='contact-info'>Art Note - Workshop, 380 Le Trong Tan</h5>
+              <h5 className='contact-info'>Ward 21, Tan Phu District, Ho Chi Minh City</h5>
+                
             </div>
           </div>
         </div>
