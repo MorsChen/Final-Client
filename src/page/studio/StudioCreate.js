@@ -168,12 +168,6 @@ class DelStudio extends Component {
         super(props);
         this.state = {...props,
             isSignin: false,
-            name: this.state.name,
-            description: this.state.description,
-            image_url: this.state.image_url,
-            address: this.state.address,
-            opentime: this.state.opentime,
-            closetime: this.state.closetime, 
         };
       }
     componentDidMount(){
