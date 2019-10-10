@@ -49,6 +49,7 @@ class Profile extends Component {
     render(){
         return [
             <div className="FullContent">
+                <div>
                 <h3>PROFILE</h3>
                 {this.state.isUserinfo ? <><button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}profile/edit/`)}>Edit Profile</button></> : 
                 <><button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}profile/create/`)}>Create Profile</button>
@@ -62,6 +63,7 @@ class Profile extends Component {
                 <p>Address: {this.state.userinfo.address}, district {this.state.userinfo.state}, {this.state.userinfo.city} city</p>
                 <p>Zipcode : {this.state.userinfo.zipcode}</p> </> : <div>Loading...</div>} </> : <></>}
                 
+                </div>
 
             </div>
         ]

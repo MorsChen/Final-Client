@@ -60,8 +60,7 @@ export default class App extends React.Component {
       users:[],
       token: existingToken || accessToken,
       user:{isSignin: false},
-      prevScrollpos: window.pageYOffset,
-      scrolling: true,
+     
     }
     
   }
@@ -69,7 +68,6 @@ export default class App extends React.Component {
   componentDidMount() {
     this.fetchhome()
     this.fetchUser()
-    window.addEventListener("scroll", this.handleScroll);
   }
   fetchhome = async () => {
     const a = await fetch(`${URLB}`,{
@@ -106,21 +104,7 @@ export default class App extends React.Component {
     this.setState({token : token})
     
   }
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  }
-  handleScroll = () => {
-    const { prevScrollpos } = this.state;
-  
-    const currentScrollPos = window.pageYOffset;
-    const scrolling = prevScrollpos > currentScrollPos;
-  
-    this.setState({
-      prevScrollpos: currentScrollPos,
-      scrolling
-    });
-  };
-  
+ 
   render() {
     console.log("check token from app", this.state.user)
     console.log('check users', this.state.users)
@@ -224,16 +208,49 @@ export default class App extends React.Component {
             <Route path="/about/" component={About} />
           </div>
   
-          <div className={classnames("footer", {
-          "footer--color": !this.state.scrolling
-        })}>
-            <h5 className="footer-h5" >Mors Chen</h5>
-          </div>
+          <Footer user={this.state.user}/>
         </Router>
       </div>
     );
   }
  
+}
+
+class Footer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {...props, isLoaded : false, isUserinfo: true,
+      prevScrollpos: window.pageYOffset,
+      scrolling: true,
+    };
+  }
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+  handleScroll = () => {
+    const { prevScrollpos } = this.state;
+  
+    const currentScrollPos = window.pageYOffset;
+    const scrolling = prevScrollpos > currentScrollPos;
+  
+    this.setState({
+      prevScrollpos: currentScrollPos,
+      scrolling
+    });
+  };
+  render(){
+    return [
+      <div className={classnames("footer", {
+        "footer--color": !this.state.scrolling
+      })}>
+          <h5 className="footer-h5" >Mors Chen</h5>
+        </div>
+    ]
+  }
 }
 
 function Workshop() {
