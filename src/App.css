@@ -107,7 +107,7 @@
   background-color: rgba(0, 0, 0, 0.246);
   flex-direction: row;
   margin-top: 5rem;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
   width: 100%;
   height: 50vh;
 }
@@ -216,15 +216,30 @@
   
 } */
 
-.modal-footer {
-  background-color: #607a8a65;
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(19, 19, 19, 0.205) !important;
+  box-shadow: rgba(29, 15, 7, 0.671) 0px 0px 11px 0px !important;
+  z-index: 0;
+  padding-left: 1rem;
+}
+.footer--color {
+  background-color: rgba(19, 19, 19, 0.609) !important;
+  box-shadow: rgba(122, 56, 21, 0.548) 0px 0px 11px 0px !important;
 }
 
-.mag-top {
-  /* margin-top: 3.5rem; */
-  /* position: fixed; */
-  top: 0;
+.footer-h5 {
+  color: #ff6600 !important;
 }
+.footer-h5:hover{
+  color: rgb(255, 204, 174) !important;
+  text-shadow: 1px 1px 3px rgb(255, 230, 0), 0 0 2em rgb(38, 255, 0), 0 0 1em #ff6600;
+  transform: scale(1.01);
+}
+
+
 
 
 .flip-card {

@@ -56,8 +56,7 @@ export default class NavBar extends React.Component {
                     Home
                   </Link>
                   
-                  {this.props.user.isSignin ? <>
-
+                  {this.props.user.isSignin ? <> {this.props.user.id<=2 ? <>
                     <NavDropdown title="Studios" id="basic-nav-dropdown">
                     <Link class="dropdown-item" to="/studios/">
                         List
@@ -70,7 +69,28 @@ export default class NavBar extends React.Component {
                         </Link>
                     </NavDropdown>
 
-                    <NavDropdown title="Events" id="basic-nav-dropdown">
+                    <NavDropdown title="Course" id="basic-nav-dropdown">
+                    <Link class="dropdown-item" to="/courses/">
+                        List
+                        </Link>
+                        <Link class="dropdown-item" to="/courses/list">
+                        Your Studio's Course
+                        </Link>
+                        <Link class="dropdown-item" to="/studios/add">
+                        Create your Course
+                        </Link>
+                    </NavDropdown>
+                    
+                    </>:<>
+                    <Link class="nav-link" to="/studios/">
+                        Studios
+                    </Link>
+                    <Link class="nav-link" to="/courses/">
+                        Courses
+                    </Link>
+                        </>}
+
+                    <NavDropdown title="Events" id="basic-nav-dropdown" data-hover="dropdown" data-animations="zoomIn fadeInLeft fadeInUp fadeInRight">
                     <Link class="dropdown-item" to="/events/">
                         List
                         </Link>
@@ -94,15 +114,6 @@ export default class NavBar extends React.Component {
                           </Link>
                       </NavDropdown>
 
-                      <Link class="nav-link" to="/workshop/">
-                      WorkShop
-                      </Link>
-                      <Link class="nav-link" to="/courses/">
-                        Courses
-                      </Link>
-                      <Link class="nav-link" to="/profile/">
-                        Profile
-                      </Link>
                       <Link class="nav-link" to="/about/">
                         About
                       </Link>
@@ -121,7 +132,11 @@ export default class NavBar extends React.Component {
                 
               </Nav>
               <Nav className="mr-0">
-                  {this.props.user.isSignin ? <><Link class="nav-link" to="/logout">Logout</Link>
+                  {this.props.user.isSignin ? <>
+                  <Link class="nav-link" to="/profile/">
+                      Profile
+                  </Link>
+                  <Link class="nav-link" to="/logout">Logout</Link>
                   </> : <>
                       <Link class="nav-link" to="/login">Login</Link>
                       <Link class="nav-link" to="/register">Sign Up</Link></>}

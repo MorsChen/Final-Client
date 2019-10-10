@@ -36,11 +36,7 @@ class StudioList extends Component {
         return [
             <div className="FullContent">
                 <h3>Studios List</h3>
-                {this.state.isStudioInfo ? <>
-                </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}studios/add`)}>Create Studio</button>
-                </>}
-                
+
                 {this.state.isStudioInfo ? <> {this.state.isLoaded ? <> {this.state.studios && 
                 this.state.studios.map( e=>{ 
                 return (
@@ -112,10 +108,6 @@ class SingleStudio extends Component {
         return [
             <div className="FullContent">
                 <h3>Studio</h3>
-                {this.state.isStudioInfo ? <>
-                </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}studios/add`)}>Create Studio</button>
-                </>}
                 
                 {this.state.isStudioInfo ? <> {this.state.isLoaded ? <>
                 {e.owner_id !== this.state.user.id ? <>

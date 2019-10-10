@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 // import { Button } from "react-bootstrap";
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import classnames from "classnames";
 
 
 
@@ -59,6 +60,8 @@ export default class App extends React.Component {
       users:[],
       token: existingToken || accessToken,
       user:{isSignin: false},
+      prevScrollpos: window.pageYOffset,
+      scrolling: true,
     }
     
   }
@@ -66,6 +69,7 @@ export default class App extends React.Component {
   componentDidMount() {
     this.fetchhome()
     this.fetchUser()
+    window.addEventListener("scroll", this.handleScroll);
   }
   fetchhome = async () => {
     const a = await fetch(`${URLB}`,{
@@ -102,6 +106,20 @@ export default class App extends React.Component {
     this.setState({token : token})
     
   }
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+  handleScroll = () => {
+    const { prevScrollpos } = this.state;
+  
+    const currentScrollPos = window.pageYOffset;
+    const scrolling = prevScrollpos > currentScrollPos;
+  
+    this.setState({
+      prevScrollpos: currentScrollPos,
+      scrolling
+    });
+  };
   
   render() {
     console.log("check token from app", this.state.user)
@@ -206,7 +224,11 @@ export default class App extends React.Component {
             <Route path="/about/" component={About} />
           </div>
   
-          <div className="modal-footer">Mors Chen</div>
+          <div className={classnames("footer", {
+          "footer--color": !this.state.scrolling
+        })}>
+            <h5 className="footer-h5" >Mors Chen</h5>
+          </div>
         </Router>
       </div>
     );

@@ -38,13 +38,6 @@ class Courses extends React.Component {
         return [
             <div className="FullContent">
                 <h3>Courses List</h3>
-                {this.state.isCourseInfo ? <>
-                </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}courses/add`)}>Create Course</button>
-                </>}
-                {this.state.user.isSignin ? <>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}courses/add`)}>Create Course</button>
-                </>:<></>}
                 
                 {this.state.isCourseInfo ? <> {this.state.isLoaded ? <> {this.state.courses && 
                 this.state.courses.map( e=>{ 

@@ -38,13 +38,6 @@ class Events extends React.Component {
         return [
             <div className="FullContent">
                 <h3>Event List</h3>
-                {this.state.isEventInfo ? <>
-                </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/add`)}>Create Event</button>
-                </>}
-                {this.state.user.isSignin ? <>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/add`)}>Create Event</button>
-                </>:<></>}
                 
                 {this.state.isEventInfo ? <> {this.state.isLoaded ? <> {this.state.events && 
                 this.state.events.map( e=>{ 
