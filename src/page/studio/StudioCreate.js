@@ -52,7 +52,7 @@ class StudioCreate extends React.Component {
             const data = await response.json()
             if (data.status === 200) {  
                return window.location.replace(`${URLF}studios/`);}
-            else {return alert('something wrong')}
+            else {return alert("you can't create new Studio, please contact admin")}
             
             
             
