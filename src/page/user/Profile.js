@@ -305,7 +305,7 @@ class CreateProfile extends React.Component {
 
     handleRegister = async e => {
         e.preventDefault();
-        if (this.state.user.isSignin !== true) {
+        if (this.props.user.isSignin !== true) {
             alert("Please login");
             return window.location.replace(`${URLF}login/`)
         }
@@ -332,7 +332,7 @@ class CreateProfile extends React.Component {
             });
             const data = await response.json()
             if (data.status === 200) {  
-               return window.location.replace(`${URLF}users/profile/`);}
+               return window.location.replace(`${URLF}/profile/`);}
             else {return alert('something wrong')}
             
             
