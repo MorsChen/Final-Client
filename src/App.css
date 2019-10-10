@@ -41,6 +41,7 @@
   font-size: 2rem;
   letter-spacing: 0.05em;
   word-spacing: 0.05em;
+  text-transform: uppercase;
 }
 .des-containner{
   display: flex;
@@ -55,7 +56,16 @@
   font-size: 1em;
   letter-spacing: 0.05em;
   word-spacing: 0.05em;
-  
+}
+
+.course-description{
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.219);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1.5em;
+  letter-spacing: 0.05em;
+  word-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .container2{
@@ -73,6 +83,81 @@
   text-align: left;
   flex-direction: column;
 }
+
+.course-content{
+  display: flex;
+  /* background-color: rgba(0, 0, 0, 0.39); */
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  color: #ff6600;
+  text-align: center;
+  flex-direction: column;
+}
+.course-title-des{
+  color: #ff6600;
+  background-color: rgba(255, 255, 255, 0.35);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1.5em;
+  letter-spacing: 0.05em;
+  word-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.course-body{
+  display: flex;
+  width: 80%;
+  color: #ff6600;
+  text-align: justify;
+  flex-direction: column;
+}
+
+.workshop-container2{
+  display: flex;
+  /* background-color: rgba(92, 92, 92, 0.39); */
+  width: 80%;
+  align-items: center;
+  text-align: justify;
+  align-content: center;
+  flex-direction: column;
+}
+
+.workshop-container3{
+  display: flex;
+  /* background-color: rgba(92, 92, 92, 0.39); */
+  width: 90%;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.workshop-content{
+  display: flex;
+  width: 30%;
+  /* background-color: rgba(0, 0, 0, 0.39); */
+  margin-top: 2rem;
+  padding-top: 1rem;
+  text-align: center;
+  flex-direction: column;
+}
+.des-workshop-content{
+  display: flex;
+  width: 80%;
+  /* background-color: rgba(0, 0, 0, 0.39); */
+  margin-top: 2rem;
+  padding-top: 1rem;
+  text-align: center;
+  flex-direction: column;
+}
+.workshop-body{
+  display: flex;
+  text-align: justify;
+  flex-direction: column;
+}
+.ws-title{
+  color: #ff6600;
+  text-align: center;
+}
+
 .ctn2-content2{
   display: flex;
   /* background-color: rgba(0, 0, 0, 0.39); */
@@ -96,6 +181,14 @@
   text-align: justify;
   flex-direction: column;
 }
+
+
+.workshop-body{
+  display: flex;
+  text-align: justify;
+  flex-direction: column;
+}
+
 .ctn2-body2{
   display: flex;
   text-align: justify;
@@ -188,20 +281,14 @@
     text-shadow: 1px 1px 3px rgb(255, 230, 0), 0 0 2em rgb(38, 255, 0), 0 0 1em #ff6600;
     transform: scale(1.05);
   }
-  .dropdown-item{
-    color: #ff6600 !important;
-    background-color: rgba(255, 230, 198, 0) !important;
-  }
+ 
+  
   .dropdown-menu{
     margin-top: 0.5rem;
     background-color: rgba(0, 0, 0, 0.171) !important;
     border: none;
   }
-  .dropdown-item:hover{
-    background-color: rgba(0, 0, 0, 0.281) !important;
-    color: rgb(255, 173, 125) !important;
-    transform: scale(1.05);
-  }
+
 
 /* .navbar {
   position: fixed;
@@ -215,6 +302,81 @@
   transition: background-color 0.4s transparent;
   
 } */
+
+.info-bg {
+  display: flex;
+  width: 100vw;
+  min-height: 60vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  /* style={{backgroundImage: `url(${e.image_studio})`, backgroundPosition:'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}} */
+}
+.container-map{
+  display: flex;
+  /* background-color: rgba(92, 92, 92, 0.39); */
+  width: 80%; 
+  flex-wrap: wrap;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.cs-ws-bg {
+  display: flex;
+  width: 300px;
+  min-height: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: darken;
+  /* style={{backgroundImage: `url(${e.image_studio})`, backgroundPosition:'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}} */
+}
+.cs-ws-bg:hover{
+  transform: scale(1.01);
+  box-shadow: rgba(122, 56, 21, 0.548) 0px 0px 11px 0px;
+  box-shadow: rgba(51, 71, 91, 0.568) 0px 10px 50px -5px;
+}
+
+.fill-color {
+  display: flex;
+  width: 300px;
+  min-height: 200px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  background-color: rgba(0, 0, 0, 0.63);
+}
+
+.cs-ws-title{
+  color: #ff6600;
+  max-width: 100%;
+  /* background-color: rgba(0, 0, 0, 0.452); */
+  text-align: center;
+}
+.cs-ws-title:hover {
+  color: rgb(255, 204, 174) !important;
+  text-shadow: 1px 1px 3px rgb(255, 230, 0), 0 0 2em rgb(38, 255, 0), 0 0 1em #ff6600;
+  transform: scale(1.05);
+}
+
+.info-footer {
+  display: flex;
+  width: 100vw;
+  height: 30px;
+  background-image: url("https://img00.deviantart.net/a11b/i/2018/171/5/3/american_roads_by_seven_teenth-dcexzjj.jpg")  ;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
 
 .footer {
   position: fixed;

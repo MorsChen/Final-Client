@@ -1,14 +1,13 @@
 import React, {Component} from "react";
 import Moment from 'react-moment';
 import 'moment-timezone';
-import "react-datepicker/dist/react-datepicker.css";
 
 const URLB = process.env.REACT_APP_BACKEND_URL
 const URLF = process.env.REACT_APP_FRONTEND_URL
-class StudioList extends Component {
+class CoursesList extends Component {
     constructor(props) {
         super(props);
-        this.state = {...props, isLoaded : false, isStudioInfo: true};
+        this.state = {...props, isLoaded : false, isCourseInfo: true};
       }
     componentDidMount(){
         this.getstudios()
@@ -16,7 +15,7 @@ class StudioList extends Component {
 
     getstudios = async() => {
         const token = this.props.user.token
-        const resp = await fetch(`${URLB}studios/list`, {
+        const resp = await fetch(`${URLB}courses/list`, {
             method: "GET",
             headers: ({
                 "Content-Type": "application/json",
@@ -25,9 +24,9 @@ class StudioList extends Component {
             });
         const data = await resp.json()
         if (data.status = 200){
-            if (data.studio === null){
-                this.setState({isStudioInfo: false})}
-            else{this.setState({ studios: data.studio,
+            if (data.course === null){
+                this.setState({isCourseInfo: false})}
+            else{this.setState({ courses: data.course,
                 isLoaded: true,
             });}
         }
@@ -35,36 +34,28 @@ class StudioList extends Component {
     render(){
         return [
             <div className="FullContent">
-                <h3>Studios List</h3>
-
-                {this.state.isStudioInfo ? <> {this.state.isLoaded ? <> {this.state.studios && 
-                this.state.studios.map( e=>{ 
+                <h3>Courses List</h3>
+                {this.state.isCourseInfo ? <>
+                </>:<>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}courses/add`)}>Create Course</button>
+                </>}
+                
+                {this.state.isCourseInfo ? <> {this.state.isLoaded ? <> {this.state.courses && 
+                this.state.courses.map( e=>{ 
                 return (
                 <div className='event-contain'>
                 {e.owner_id !== this.state.user.id ? <>
                 </>:<>
-                <div className="div-button" style={{justifyContent: "space-between"}}>
-                    <div>
-                    <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}studios/edit/${e.studio_id}`)}>Edit your Studio</button>
-                    <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}studios/delete/${e.studio_id}`)}>Delete Studio</button>
-                    </div>
-                    <div>
-                    <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}courses/add`)}>Create New Course</button>
-                    <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}courses/list`)}>Show Studio's Courses</button>
-                    </div>
-                </div>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}courses/edit/${e.course_id}`)}>Edit your Course</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}courses/delete/${e.course_id}`)}>Delete Course</button>
                 </>}
                 
                 <p onClick={()=>window.location.replace(`${URLF}studios/single/${e.studio_id}`)}>
-                Studio's name : {e.name}</p>
+                    Studio's name : {e.name}</p>
+                <p onClick={()=>window.location.replace(`${URLF}courses/single/${e.course_id}`)}>
+                    Course's Title : {e.title} </p>
                 <img src={`${e.image_url}`} style={{width: '80vw', height: '50vh'}}/>
-                <p>Description: {e.description}</p>
-                <p>Address: {e.address}</p>
-                <p>Ward: {e.ward}</p>
-                <p>District: {e.district}</p>
-                <p>City: {e.city}</p>
-                <p>Open_At : {e.opentime}</p>
-                <p>Closed_At : {e.closetime}</p>
+                <p>Body: {e.body}</p>
                 <p>Views : {e.views}</p>
                 <p>Created : <Moment date={e.created}/></p>
                 <p>Updated : <Moment date={e.updated}/></p>
@@ -78,7 +69,7 @@ class StudioList extends Component {
 }
 
 
-class SingleStudio extends Component {
+class SingleCourse extends Component {
     constructor(props) {
         super(props);
         this.state = {...props, isLoaded : false, isStudioInfo: true};
@@ -111,20 +102,16 @@ class SingleStudio extends Component {
         return [
             <div className="FullContent">
                 <h3>Studio</h3>
+                {this.state.isStudioInfo ? <>
+                </>:<>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}studios/add`)}>Create Studio</button>
+                </>}
                 
                 {this.state.isStudioInfo ? <> {this.state.isLoaded ? <>
                 {e.owner_id !== this.state.user.id ? <>
                 </>:<>
-                <div className="div-button" style={{justifyContent: "space-between"}}>
-                    <div>
-                    <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}studios/edit/${e.studio_id}`)}>Edit your Studio</button>
-                    <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}studios/delete/${e.studio_id}`)}>Delete Studio</button>
-                    </div>
-                    <div>
-                    <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}courses/add`)}>Create New Course</button>
-                    <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}courses/list`)}>Show Studio's Courses</button>
-                    </div>
-                </div>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}studios/edit/${e.studio_id}`)}>Edit your Studio</button>
+                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}studios/delete/${e.studio_id}`)}>Delete Studio</button>
                 </>}
                 
                 <p>
@@ -132,9 +119,6 @@ class SingleStudio extends Component {
                 <img src={`${e.image_url}`} style={{width: '80vw', height: '50vh'}}/>
                 <p>Description: {e.description}</p>
                 <p>Address: {e.address}</p>
-                <p>Ward: {e.ward}</p>
-                <p>District: {e.district}</p>
-                <p>City: {e.city}</p>
                 <p>Open_At : {e.opentime}</p>
                 <p>Closed_At : {e.closetime}</p>
                 <p>Views : {e.views}</p>
@@ -149,5 +133,5 @@ class SingleStudio extends Component {
     }
 }
 
-export default StudioList
-export {SingleStudio}
+export default CoursesList
+export {SingleCourse}

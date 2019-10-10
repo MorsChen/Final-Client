@@ -30,6 +30,13 @@ import Courses from "./page/course/Courses";
 import CourseAdd, {EditCourse, DelCourse} from "./page/course/CourseAdd";
 import CoursesList, { SingleCourse } from "./page/course/CoursesList";
 
+import Workshops from "./page/workshop/Workshops";
+import WorkshopAdd, {EditWorkshop, DelWorkshop} from "./page/workshop/WorkshopAdd";
+import WorkshopList, { SingleWorkshop } from "./page/workshop/WorkshopList";
+
+import Info from "./page/info/Info";
+import InfoAdd, {EditInfo, DelInfo} from "./page/info/InfoAdd";
+
 
 
 const URLB = process.env.REACT_APP_BACKEND_URL
@@ -120,6 +127,7 @@ export default class App extends React.Component {
             <Route path="/events/" exact component={ (props) => <Events {...props} user = {this.state.user} />} />
             <Route path="/posts/" exact component={ (props) => <Posts {...props} user = {this.state.user} />} />
             <Route path="/courses/" exact component={ (props) => <Courses {...props} user = {this.state.user} />} />
+            <Route path="/workshops/" exact component={ (props) => <Workshops {...props} user = {this.state.user} />} />
             
             <Route path="/profile/" exact component={ (props) => {if(this.state.user.isSignin === true) { 
               return <Profile {...props} user = {this.state.user}/>
@@ -203,8 +211,35 @@ export default class App extends React.Component {
                 return <DelCourse {...props} user = {this.state.user} id = {props.match.params.id} />
                 }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
 
-            
-            <Route path="/workshop/" component={Workshop} />
+            <Route path="/infos/" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <Info {...props} user = {this.state.user} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/infos/add" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <InfoAdd {...props} user = {this.state.user} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+           <Route path="/infos/edit/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <EditInfo {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/infos/delete/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <DelInfo {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+
+            <Route path="/workshops/add" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <WorkshopAdd {...props} user = {this.state.user} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/workshops/list" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <WorkshopList {...props} user = {this.state.user} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/workshops/single/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <SingleWorkshop {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/workshops/edit/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <EditWorkshop {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+            <Route path="/workshops/delete/:id" component={ (props) => {if(this.state.user.isSignin === true) {
+                return <DelWorkshop {...props} user = {this.state.user} id = {props.match.params.id} />
+                }else{ return <Login {...props} getToken = {this.getToken}/>}}}/>
+
             <Route path="/about/" component={About} />
           </div>
   
@@ -247,14 +282,10 @@ class Footer extends React.Component {
       <div className={classnames("footer", {
         "footer--color": !this.state.scrolling
       })}>
-          <h5 className="footer-h5" >Mors Chen</h5>
+          <h5 className="footer-h5" >ART NOTE</h5>
         </div>
     ]
   }
-}
-
-function Workshop() {
-  return <div className="FullContent"> Workshop </div>;
 }
 
 function About() {

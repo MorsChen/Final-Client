@@ -2,27 +2,20 @@ import React, {Component} from "react";
 // import { Button } from "react-bootstrap";
 import Moment from 'react-moment';
 import 'moment-timezone';
- 
 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-// import { es } from "date-fns/esm/locale";
 
 const URLB = process.env.REACT_APP_BACKEND_URL
 const URLF = process.env.REACT_APP_FRONTEND_URL
-class StudioCreate extends React.Component {
+class WorkshopAdd extends React.Component {
     constructor() {
         super();
         this.state = {
-            name: "",
+            title: "",
             description: "",
+            people: "",
+            detail: "",
+            requirement: "",
             image_url: "",
-            address: "",
-            ward: "",
-            district: "",
-            city: "",
-            opentime: "",
-            closetime: "",
         };
 
       }
@@ -35,21 +28,18 @@ class StudioCreate extends React.Component {
             return window.location.replace(`${URLF}login/`)
         }
         else {
-            let newstudio = {
-            name: this.state.name,
+            let newworkshop = {
+            title: this.state.title,
             description: this.state.description,
+            people: this.state.people,
+            detail: this.state.detail,
+            requirement: this.state.requirement,
             image_url: this.state.image_url,
-            address: this.state.address,
-            ward: this.state.ward,
-            district: this.state.district,
-            city: this.state.city,
-            opentime: this.state.opentime,
-            closetime: this.state.closetime,
             };
             const token = this.props.user.token
-            const response = await fetch(`${URLB}studios/add`, {
+            const response = await fetch(`${URLB}workshops/add`, {
             method: "POST",
-            body: JSON.stringify(newstudio),
+            body: JSON.stringify(newworkshop),
             headers: new Headers({
                 "Content-Type": "application/json",
                 "Authorization": `Token ${token}`
@@ -57,8 +47,8 @@ class StudioCreate extends React.Component {
             });
             const data = await response.json()
             if (data.status === 200) {  
-               return window.location.replace(`${URLF}studios/`);}
-            else {return alert("you can't create new Studio, please contact admin")}
+               return window.location.replace(`${URLF}courses/`);}
+            else {return alert("Create new workshop was not success")}
             
             
             
@@ -84,19 +74,19 @@ class StudioCreate extends React.Component {
                     onChange={e => this.handleChange(e)}
                 >
                     <div className="form-group">
-                    <h1 style={{ textAlign: "center" }}>Create Studio</h1>
+                    <h1 style={{ textAlign: "center" }}>Create Workshop</h1>
                     </div>
                     <div className="form-group">
-                    <label for="exampleFormControlInput1">Name</label>
+                    <label for="exampleFormControlInput1">Title</label>
                     <input
                         type="text"
-                        name="name"
+                        name="title"
                         className="form-control"
-                        placeholder="Enter your studio name"
+                        placeholder="Enter your course title"
                         autoFocus
                         required={true}
                     /></div>
-
+                    
                     <div className="form-group">
                     <label for="exampleFormControlInput1">Description</label>
                     <textarea
@@ -104,6 +94,42 @@ class StudioCreate extends React.Component {
                         name="description"
                         className="form-control"
                         placeholder="Enter Description"
+                        rows="5"
+                        autoFocus
+                        required={true}
+                    ></textarea></div>
+
+                    <div className="form-group">
+                    <label for="exampleFormControlInput1">Who can learn ?</label>
+                    <textarea
+                        type="text"
+                        name="people"
+                        className="form-control"
+                        placeholder="Please enter info"
+                        rows="5"
+                        autoFocus
+                        required={true}
+                    ></textarea></div>
+
+                    <div className="form-group">
+                    <label for="exampleFormControlInput1">Detail</label>
+                    <textarea
+                        type="text"
+                        name="detail"
+                        className="form-control"
+                        placeholder="Enter detail"
+                        rows="5"
+                        autoFocus
+                        required={true}
+                    ></textarea></div>
+
+                    <div className="form-group">
+                    <label for="exampleFormControlInput1">Requirement</label>
+                    <textarea
+                        type="text"
+                        name="requirement"
+                        className="form-control"
+                        placeholder="Enter Requirement"
                         rows="5"
                         autoFocus
                         required={true}
@@ -120,77 +146,11 @@ class StudioCreate extends React.Component {
                         required={true}
                     /></div>
 
-                    <div className="form-group">
-                    <label for="exampleFormControlInput1">Address</label>
-                    <input
-                        type="text"
-                        name="address"
-                        className="form-control"
-                        placeholder="Enter your address"
-                        autoFocus
-                        required={true}
-                    /></div>
-
-                    <div className="form-group">
-                    <label for="exampleFormControlInput1">Ward</label>
-                    <input
-                        type="text"
-                        name="ward"
-                        className="form-control"
-                        placeholder="Enter your ward"
-                        autoFocus
-                        required={true}
-                    /></div>
-
-                    <div className="form-group">
-                    <label for="exampleFormControlInput1">District</label>
-                    <input
-                        type="text"
-                        name="district"
-                        className="form-control"
-                        placeholder="Enter your district"
-                        autoFocus
-                        required={true}
-                    /></div>
-
-                    <div className="form-group">
-                    <label for="exampleFormControlInput1">City</label>
-                    <input
-                        type="text"
-                        name="city"
-                        className="form-control"
-                        placeholder="Enter your city"
-                        autoFocus
-                        required={true}
-                    /></div>
-        
-                    <div className="form-group">
-                    <label for="exampleFormControlInput1">Open At</label>
-                    <input
-                        type="text"
-                        name="opentime"
-                        className="form-control"
-                        placeholder="Open Time HH:MM"
-                        autoFocus
-                        required={true}
-                    /></div>
-
-                    <div className="form-group">
-                    <label for="exampleFormControlInput1">Closed At</label>
-                    <input
-                        type="text"
-                        name="closetime"
-                        className="form-control"
-                        placeholder="Closed Time HH:MM"
-                        autoFocus
-                        required={true}
-                    /></div>
-
                     <button
                     type="submit"
                     className="btn btn-primary"
                     >
-                    Create Studio
+                    Create Workshop
                     </button>
                 </form>
                 </div>
@@ -202,11 +162,17 @@ class StudioCreate extends React.Component {
     }
 }
 
-class DelStudio extends Component {
+class DelWorkshop extends Component {
     constructor(props) {
         super(props);
         this.state = {...props,
             isSignin: false,
+            title: this.state.title,
+            description: this.state.description,
+            people: this.state.people,
+            detail: this.state.detail,
+            requirement: this.state.requirement,
+            image_url: this.state.image_url,
         };
       }
     componentDidMount(){
@@ -216,7 +182,7 @@ class DelStudio extends Component {
     getprofile = async() => {
         const token = this.state.user.token
         const id = this.state.id
-        const resp = await fetch(`${URLB}studios/delete/${id}`, {
+        const resp = await fetch(`${URLB}workshops/delete/${id}`, {
             method: "GET",
             headers: ({
                 "Content-Type": "application/json",
@@ -225,18 +191,18 @@ class DelStudio extends Component {
             });
         const data = await resp.json()
         if (data.status = 200){
-            return window.location.replace(`${URLF}studios`)}
+            return window.location.replace(`${URLF}courses`)}
         else {return alert('something wrong')}
         }
     render (){ return []}
     }
 
 
-class EditStudio extends React.Component {
+class EditWorkshop extends React.Component {
     constructor(props) {
         super(props);
         this.state = {...props, isLoaded : false, 
-            isStudioInfo: true, 
+            isWorkshopInfo: true, 
            };
       }
     componentDidMount(){
@@ -245,7 +211,7 @@ class EditStudio extends React.Component {
     getstudio = async() => {
         const token = this.state.user.token
         const id = this.state.id
-        const resp = await fetch(`${URLB}studios/single/${id}`, {
+        const resp = await fetch(`${URLB}workshops/single/${id}`, {
             method: "GET",
             headers: ({
                 "Content-Type": "application/json",
@@ -254,9 +220,9 @@ class EditStudio extends React.Component {
             });
         const data = await resp.json()
         if (data.status = 200){
-            if (data.studio === null){
-                this.setState({isStudioInfo: false})}
-                else{this.setState({ studio: data.studio,
+            if (data.workshop === null){
+                this.setState({isWorkshopInfo: false})}
+                else{this.setState({ workshop: data.workshop,
                     isLoaded: true,
                 });}
         }
@@ -265,27 +231,24 @@ class EditStudio extends React.Component {
     handleRegister = async e => {
         const id = this.state.id
         e.preventDefault();
-        const i = this.state.studio
+        const i = this.state.workshop
         if (this.state.user.isSignin !== true) {
             alert("Please login");
             return window.location.replace(`${URLF}login/`)
         }
         else {
-            const newstudio = {
-            name: this.state.name || i.name,
+            const newworkshop = {
+            title: this.state.title || i.title,
             description: this.state.description || i.description,
+            people: this.state.people || i.people,
+            detail: this.state.detail || i.detail,
+            requirement: this.state.requirement || i.requirement,
             image_url: this.state.image_url || i.image_url,
-            address: this.state.address || i.address,
-            ward: this.state.ward || i.ward,
-            district: this.state.district || i.district,
-            city: this.state.city || i.city,
-            opentime: this.state.opentime || i.opentime,
-            closetime: this.state.closetime || i.closetime,
             };
             const token = this.props.user.token
-            const response = await fetch(`${URLB}studios/edit/${id}`, {
+            const response = await fetch(`${URLB}workshops/edit/${id}`, {
             method: "POST",
-            body: JSON.stringify(newstudio),
+            body: JSON.stringify(newworkshop),
             headers: new Headers({
                 "Content-Type": "application/json",
                 "Authorization": `Token ${token}`
@@ -293,8 +256,8 @@ class EditStudio extends React.Component {
             });
             const data = await response.json()
             if (data.status === 200) {  
-               return window.location.replace(`${URLF}studios/single/${id}`);}
-            else {return alert('something wrong')}
+               return window.location.replace(`${URLF}courses`);}
+            else {return alert("The workshop didn't change")}
         }
         };
     handleChange = e => {
@@ -307,7 +270,7 @@ class EditStudio extends React.Component {
     };
 
     render() {
-        const e = this.state.studio
+        const e = this.state.workshop
         return (
             <div className="container">
             <div className="jumbotron jumbotron-fluid custome-jumbo">
@@ -318,17 +281,17 @@ class EditStudio extends React.Component {
                     onChange={e => this.handleChange(e)}
                 >
                     <div className="form-group">
-                    <h1 style={{ textAlign: "center" }}>Edit your Studio</h1>
+                    <h1 style={{ textAlign: "center" }}>Edit your Workshop</h1>
                     </div>
-                    {this.state.isStudioInfo ? <> {this.state.isLoaded ? <>
+                    {this.state.isWorkshopInfo ? <> {this.state.isLoaded ? <>
                     
                     <div className="form-group">
-                    <label for="exampleFormControlInput1">Studio Name</label>
-                    <p>Name: {e.name}</p>
+                    <label for="exampleFormControlInput1">Workshop Title</label>
+                    <p>{e.title}</p>
                     <input
                         type="text"
-                        name="name"
-                        defaultValue = {e.name}
+                        name="title"
+                        defaultValue = {e.title}
                         className="form-control"
                         autoFocus
                         required={true}
@@ -336,12 +299,51 @@ class EditStudio extends React.Component {
 
                     <div className="form-group">
                     <label for="exampleFormControlInput1">Description</label>
-                    <p>Description: {e.description}</p>
+                    <p>{e.description}</p>
                     <textarea
                         type="text"
                         name="description"
                         className="form-control"
                         defaultValue = {e.description}
+                        rows="5"
+                        autoFocus
+                        required={true}
+                    ></textarea></div>
+
+                    <div className="form-group">
+                    <label for="exampleFormControlInput1">Who can learn ?</label>
+                    <p>{e.people}</p>
+                    <textarea
+                        type="text"
+                        name="people"
+                        className="form-control"
+                        defaultValue = {e.people}
+                        rows="5"
+                        autoFocus
+                        required={true}
+                    ></textarea></div>
+
+                    <div className="form-group">
+                    <label for="exampleFormControlInput1">Detail</label>
+                    <p>{e.detail}</p>
+                    <textarea
+                        type="text"
+                        name="detail"
+                        className="form-control"
+                        defaultValue = {e.detail}
+                        rows="5"
+                        autoFocus
+                        required={true}
+                    ></textarea></div>
+
+                    <div className="form-group">
+                    <label for="exampleFormControlInput1">Requirement</label>
+                    <p>{e.requirement}</p>
+                    <textarea
+                        type="text"
+                        name="requirement"
+                        className="form-control"
+                        defaultValue = {e.requirement}
                         rows="5"
                         autoFocus
                         required={true}
@@ -359,80 +361,8 @@ class EditStudio extends React.Component {
                         required={true}
                     /></div>
 
-                    <div className="form-group">
-                    <label for="exampleFormControlInput1">Address</label>
-                    <p>Address: {e.address}</p>
-                    <input
-                        type="text"
-                        name="address"
-                        className="form-control"
-                        defaultValue = {e.address}
-                        autoFocus
-                        required={true}
-                    /></div>
-
-                    <div className="form-group">
-                    <label for="exampleFormControlInput1">Ward</label>
-                    <p>Ward: {e.ward}</p>
-                    <input
-                        type="text"
-                        name="ward"
-                        className="form-control"
-                        defaultValue = {e.ward}
-                        autoFocus
-                        required={true}
-                    /></div>
-
-                    <div className="form-group">
-                    <label for="exampleFormControlInput1">District</label>
-                    <p>District: {e.district}</p>
-                    <input
-                        type="text"
-                        name="district"
-                        className="form-control"
-                        defaultValue = {e.district}
-                        autoFocus
-                        required={true}
-                    /></div>
-
-                    <div className="form-group">
-                    <label for="exampleFormControlInput1">City</label>
-                    <p>City: {e.city}</p>
-                    <input
-                        type="text"
-                        name="city"
-                        className="form-control"
-                        defaultValue = {e.city}
-                        autoFocus
-                        required={true}
-                    /></div>
-        
-                    <div className="form-group">
-                    <label for="exampleFormControlInput1">Open At</label>
-                    <p>Open_At: {e.opentime}</p>
-                    <input
-                        type="text"
-                        name="opentime"
-                        className="form-control"
-                        defaultValue = {e.opentime}
-                        autoFocus
-                        required={true}
-                    /></div>
-
-                    <div className="form-group">
-                    <label for="exampleFormControlInput1">Closed At</label>
-                    <p>Closed_At: {e.closetime}</p>
-                    <input
-                        type="text"
-                        name="closetime"
-                        className="form-control"
-                        defaultValue = {e.closetime}
-                        autoFocus
-                        required={true}
-                    /></div>
                     <p> Created At: <Moment date={e.created} /> </p><br/>
 
-                    
                     <button
                     type="submit"
                     className="btn btn-primary"
@@ -444,10 +374,9 @@ class EditStudio extends React.Component {
                 </div>
             </div>
             </div>
-            
-            
+         
         );
     }
 }
-export default StudioCreate
-export {EditStudio,DelStudio}
+export default WorkshopAdd
+export {EditWorkshop,DelWorkshop}

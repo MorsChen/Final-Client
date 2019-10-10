@@ -11,7 +11,9 @@ class CourseAdd extends React.Component {
         super();
         this.state = {
             title: "",
+            description: "",
             body: "",
+            detail: "",
             image_url: "",
         };
 
@@ -27,7 +29,9 @@ class CourseAdd extends React.Component {
         else {
             let newcourse = {
             title: this.state.title,
+            description: this.state.description,
             body: this.state.body,
+            detail: this.state.detail,
             image_url: this.state.image_url,
             };
             const token = this.props.user.token
@@ -80,6 +84,18 @@ class CourseAdd extends React.Component {
                         autoFocus
                         required={true}
                     /></div>
+                    
+                    <div className="form-group">
+                    <label for="exampleFormControlInput1">Description</label>
+                    <textarea
+                        type="text"
+                        name="description"
+                        className="form-control"
+                        placeholder="Enter Description"
+                        rows="5"
+                        autoFocus
+                        required={true}
+                    ></textarea></div>
 
                     <div className="form-group">
                     <label for="exampleFormControlInput1">Body</label>
@@ -88,6 +104,18 @@ class CourseAdd extends React.Component {
                         name="body"
                         className="form-control"
                         placeholder="Enter body"
+                        rows="5"
+                        autoFocus
+                        required={true}
+                    ></textarea></div>
+
+                    <div className="form-group">
+                    <label for="exampleFormControlInput1">Detail</label>
+                    <textarea
+                        type="text"
+                        name="detail"
+                        className="form-control"
+                        placeholder="Enter detail"
                         rows="5"
                         autoFocus
                         required={true}
@@ -126,7 +154,9 @@ class DelCourse extends Component {
         this.state = {...props,
             isSignin: false,
             title: this.state.title,
+            description: this.state.description,
             body: this.state.body,
+            detail: this.state.detail,
             image_url: this.state.image_url,
         };
       }
@@ -194,7 +224,9 @@ class EditCourse extends React.Component {
         else {
             const newcourse = {
             title: this.state.title || i.title,
+            description: this.state.description || i.description,
             body: this.state.body || i.body,
+            detail: this.state.detail || i.detail,
             image_url: this.state.image_url || i.image_url,
             };
             const token = this.props.user.token
@@ -239,7 +271,7 @@ class EditCourse extends React.Component {
                     
                     <div className="form-group">
                     <label for="exampleFormControlInput1">Course Title</label>
-                    <p>Course Title: {e.title}</p>
+                    <p>{e.title}</p>
                     <input
                         type="text"
                         name="title"
@@ -250,13 +282,39 @@ class EditCourse extends React.Component {
                     /></div>
 
                     <div className="form-group">
+                    <label for="exampleFormControlInput1">Description</label>
+                    <p>{e.description}</p>
+                    <textarea
+                        type="text"
+                        name="description"
+                        className="form-control"
+                        defaultValue = {e.description}
+                        rows="5"
+                        autoFocus
+                        required={true}
+                    ></textarea></div>
+
+                    <div className="form-group">
                     <label for="exampleFormControlInput1">Body</label>
-                    <p>Body: {e.body}</p>
+                    <p>{e.body}</p>
                     <textarea
                         type="text"
                         name="body"
                         className="form-control"
                         defaultValue = {e.body}
+                        rows="5"
+                        autoFocus
+                        required={true}
+                    ></textarea></div>
+
+                    <div className="form-group">
+                    <label for="exampleFormControlInput1">Detail</label>
+                    <p>{e.detail}</p>
+                    <textarea
+                        type="text"
+                        name="detail"
+                        className="form-control"
+                        defaultValue = {e.detail}
                         rows="5"
                         autoFocus
                         required={true}
@@ -287,8 +345,7 @@ class EditCourse extends React.Component {
                 </div>
             </div>
             </div>
-            
-            
+         
         );
     }
 }

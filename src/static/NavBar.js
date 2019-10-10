@@ -2,14 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown} from "react-bootstrap";
 import classnames from "classnames";
+import { isThisHour } from "date-fns";
 
-
+const URLB = process.env.REACT_APP_BACKEND_URL
+const URLF = process.env.REACT_APP_FRONTEND_URL
 export default class NavBar extends React.Component {
   constructor(props) {
       super(props);
       this.state = {...props,
         isLoaded : false,
         isUserinfo: true,
+        isWorkshopInfo: true,
         prevScrollpos: window.pageYOffset,
         scrolling: true,
       };
@@ -20,6 +23,7 @@ export default class NavBar extends React.Component {
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
+    this.getStudios()
   }
   
   componentWillUnmount() {
@@ -36,6 +40,25 @@ export default class NavBar extends React.Component {
       scrolling
     });
   };
+
+  getStudios = async() => {
+    const resp = await fetch(`${URLB}workshops/`, {
+        method: "GET",
+        headers: ({
+            "Content-Type": "application/json",
+            })
+        });
+    const data = await resp.json()
+    if (data.status = 200){
+        if (data.workshop === null){
+            this.setState({isWorkshopInfo: false})}
+        else{this.setState({ workshops: data.workshop,
+            isLoaded: true,
+        });
+    }
+    }
+}
+
 
   render () {
    
@@ -58,26 +81,50 @@ export default class NavBar extends React.Component {
                   
                   {this.props.user.isSignin ? <> {this.props.user.id<=2 ? <>
                     <NavDropdown title="Studios" id="basic-nav-dropdown">
-                    <Link class="dropdown-item" to="/studios/">
+                        <Link class="nav-link" to="/studios/">
                         List
                         </Link>
-                        <Link class="dropdown-item" to="/studios/list">
+                        <Link class="nav-link" to="/studios/list">
                         Your Studio
                         </Link>
-                        <Link class="dropdown-item" to="/studios/add">
+                        <Link class="nav-link" to="/studios/add">
                         Create your Studio
+                        </Link>
+                        <div class="dropdown-divider"></div>
+                        <Link class=" nav-link" to="/infos/">
+                        Info
+                        </Link>
+                        <Link class="nav-link" to="/infos/add">
+                        Create Info
                         </Link>
                     </NavDropdown>
 
                     <NavDropdown title="Course" id="basic-nav-dropdown">
-                    <Link class="dropdown-item" to="/courses/">
-                        List
+                      <Link class="nav-link" to="/courses/">
+                        Studio's Course
                         </Link>
-                        <Link class="dropdown-item" to="/courses/list">
-                        Your Studio's Course
-                        </Link>
-                        <Link class="dropdown-item" to="/studios/add">
+                        <Link class="nav-link" to="/courses/add">
                         Create your Course
+                        </Link>
+                        <div class="dropdown-divider"></div>
+                        <div>
+                        {this.state.workshops && this.state.workshops.map( e=>{
+                          return (
+                            <div>
+                              <Link class="nav-link" 
+                              // to={`/workshops/single/${e.workshop_id}`}
+                              onClick={()=>window.location.replace(`${URLF}workshops/single/${e.workshop_id}`)}
+                              >
+                              {e.title}
+                              </Link>
+
+                              </div>
+                          )
+                        })}
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <Link class="nav-link" to="/workshops/add">
+                        Create Workshop
                         </Link>
                     </NavDropdown>
                     
@@ -85,31 +132,50 @@ export default class NavBar extends React.Component {
                     <Link class="nav-link" to="/studios/">
                         Studios
                     </Link>
-                    <Link class="nav-link" to="/courses/">
-                        Courses
-                    </Link>
+                    <NavDropdown title="Course" id="basic-nav-dropdown">
+                      <Link class="nav-link" to="/courses">
+                        Courses & Workshop
+                        </Link>
+                        
+                        <div class="dropdown-divider"></div>
+                        <div>
+                        {this.state.workshops && this.state.workshops.map( e=>{
+                          return (
+                            <div>
+                              <Link class="nav-link" 
+                              // to={`/workshops/single/${e.workshop_id}`}
+                              onClick={()=>window.location.replace(`${URLF}workshops/single/${e.workshop_id}`)}
+                              >
+                              {e.title}
+                              </Link>
+
+                              </div>
+                          )
+                        })}
+                        </div>
+                    </NavDropdown>
                         </>}
 
                     <NavDropdown title="Events" id="basic-nav-dropdown" data-hover="dropdown" data-animations="zoomIn fadeInLeft fadeInUp fadeInRight">
-                    <Link class="dropdown-item" to="/events/">
+                    <Link class="nav-link" to="/events/">
                         List
                         </Link>
-                        <Link class="dropdown-item" to="/events/list">
+                        <Link class="nav-link" to="/events/list">
                         Your Events
                         </Link>
-                        <Link class="dropdown-item" to="/events/add">
+                        <Link class="nav-link" to="/events/add">
                         Create Events
                         </Link>
                       </NavDropdown>
 
                       <NavDropdown title="Posts" id="basic-nav-dropdown">
-                      <Link class="dropdown-item" to="/Posts/">
+                      <Link class="nav-link" to="/Posts/">
                           List
                           </Link>
-                          <Link class="dropdown-item" to="/posts/list">
+                          <Link class="nav-link" to="/posts/list">
                           Your Posts
                           </Link>
-                          <Link class="dropdown-item" to="/posts/add">
+                          <Link class="nav-link" to="/posts/add">
                           Create Posts
                           </Link>
                       </NavDropdown>
