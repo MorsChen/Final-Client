@@ -5,44 +5,44 @@ import 'moment-timezone';
 
 const URLB = process.env.REACT_APP_BACKEND_URL
 const URLF = process.env.REACT_APP_FRONTEND_URL
-class PostAdd extends React.Component {
+class Comments extends React.Component {
     constructor() {
         super();
         this.state = {
-            title: "",
             body: "",
         };
 
       }
 
-    handleRegister = async e => {
-        e.preventDefault();
+      handleAddCmt = async (i, id) => {
+        const a = id
+        i.preventDefault();
         const user = this.props.user
         if (user.isSignin !== true) {
             alert("Please login");
             return window.location.replace(`${URLF}login/`)
         }
         else {
-            let newpost = {
-            title: this.state.title,
+            let newcmt = {
             body: this.state.body,
             };
             const token = this.props.user.token
-            const response = await fetch(`${URLB}posts/add`, {
+            const response = await fetch(`${URLB}posts/${a}/comments/add/`, {
             method: "POST",
-            body: JSON.stringify(newpost),
+            body: JSON.stringify(newcmt),
             headers: new Headers({
                 "Content-Type": "application/json",
                 "Authorization": `Token ${token}`
             })
             });
             const data = await response.json()
-            if (data.status === 200) {  
-               return window.location.replace(`${URLF}posts/`);}
+            if (data.status === 200) {
+            //   this.getprofile();
+              this.setState({ posts: data.post,
+                isLoaded: true,
+            });
+            }
             else {return alert('something wrong')}
-            
-            
-            
         }
         };
     handleChange = e => {
@@ -60,48 +60,25 @@ class PostAdd extends React.Component {
             <div className="jumbotron jumbotron-fluid custome-jumbo">
                 <div className="container">
                 <form
-    
-                    onSubmit={e => this.handleRegister(e)}
+                    onSubmit={(i, id) => { id = e.post_id
+                        this.handleAddCmt(i, id)}}
                     onChange={e => this.handleChange(e)}
                 >
                     <div className="form-group">
-                    <h1 style={{ textAlign: "center" }}>Create Post</h1>
-                    </div>
-                    <div className="form-group">
-                    <label for="exampleFormControlInput1">Title</label>
-                    <input
-                        type="text"
-                        name="title"
-                        className="form-control"
-                        placeholder="Enter new title"
-                        autoFocus
-                        required={true}
-                    /></div>
-
-                    <div className="form-group">
-                    <label for="exampleFormControlInput1">Body</label>
                     <textarea
                         type="text"
                         name="body"
                         className="form-control"
                         placeholder="Enter Body"
                         rows="5"
-                        autoFocus
+                        autoFocus 
                         required={true}
                     ></textarea></div>
-
-                    <button
-                    type="submit"
-                    className="btn btn-primary"
-                    >
-                    Create Post
-                    </button>
+                    <button type="submit" className="btn btn-primary">Create Post</button>
                 </form>
                 </div>
             </div>
             </div>
-            
-            
         );
     }
 }
@@ -114,13 +91,13 @@ class DelPost extends Component {
         };
       }
     componentDidMount(){
-        this.getposts()
+        this.delcomment()
     }
 
-    getposts = async() => {
+    delcomment = async(e) => {
         const token = this.state.user.token
-        const id = this.state.id
-        const resp = await fetch(`${URLB}posts/delete/${id}`, {
+        const id = e
+        const resp = await fetch(`${URLB}posts/comments/delete/${id}`, {
             method: "POST",
             headers: ({
                 "Content-Type": "application/json",
@@ -129,9 +106,11 @@ class DelPost extends Component {
             });
         const data = await resp.json()
         if (data.status = 200){
-            return window.location.replace(`${URLF}posts`)}
+            this.getprofile()}
         else {return alert('something wrong')}
         }
+
+
     render (){ return []}
     }
 
@@ -265,5 +244,5 @@ class EditPost extends React.Component {
         );
     }
 }
-export default PostAdd
+export default Comments
 export {EditPost,DelPost}

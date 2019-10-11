@@ -37,6 +37,7 @@ class Events extends React.Component {
     render(){
         return [
             <div className="FullContent">
+                <div className="in-fullcont">
                 <h3>Event List</h3>
                 
                 {this.state.isEventInfo ? <> {this.state.isLoaded ? <> {this.state.events && 
@@ -63,6 +64,7 @@ class Events extends React.Component {
                 )
                 })}
                 </> : <div>Loading...</div>} </> : <></>}
+            </div>
             </div>
         ]
     }

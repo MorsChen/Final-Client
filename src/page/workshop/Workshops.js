@@ -51,6 +51,7 @@ class Workshops extends React.Component {
                             </div>
                         </div>
                     </div>
+                    <div className='workshop-fullcontainer'>
                     <div className="workshop-container2">
                     <div className="des-workshop-content">
                     <h7>{e.description}</h7><br/>
@@ -79,18 +80,20 @@ class Workshops extends React.Component {
                         </div>
 
                     </div>
+                    </div>
 
                     { this.state.user.id !== 1 ? <>
                         </>:<>
                         <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}workshops/edit/${e.workshop_id}`)}>Edit Workshop</button>
                         <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}workshops/delete/${e.workshop_id}`)}>Delete Workshop</button>
                         </>}
-                    <div className='info-footer'></div>
+                    
                 </div>
                 
                 )
                 })}
                 </> : <div>Loading...</div>} </> : <></>}
+                <div className='info-footer'></div>
             </div>
 
             // <div className="FullContent">

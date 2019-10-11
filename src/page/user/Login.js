@@ -56,6 +56,7 @@ export default class Login extends Component {
     render() {
         return (
             <div className="FullContent">
+            <div className="in-fullcont">
             <div className="jumbotron jumbotron-fluid custome-jumbo">
                 <div className="container">
                 <form  
@@ -100,6 +101,7 @@ export default class Login extends Component {
                     </button>
                 </form>
                 </div>
+            </div>
             </div>
             </div>
         );

@@ -37,6 +37,7 @@ class Studios extends React.Component {
     render(){
         return [
             <div className="FullContent">
+                <div className="in-fullcont">
                 <h3>Studios List</h3>
                 {this.state.isStudioInfo ? <> {this.state.isLoaded ? <> {this.state.studios && 
                 this.state.studios.map( e=>{ 
@@ -62,6 +63,7 @@ class Studios extends React.Component {
                 )
                 })}
                 </> : <div>Loading...</div>} </> : <></>}
+                </div>
             </div>
         ]
     }

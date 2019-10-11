@@ -47,7 +47,8 @@ class WorkshopList extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="workshop-container3">
+                    <div className='workshop-fullcontainer'>
+                    <div className="workshop-container2">
                     <div className="des-workshop-content">
                     <h7>{e.description}</h7><br/>
                     </div></div>
@@ -74,6 +75,7 @@ class WorkshopList extends Component {
                             </div>
                         </div>
 
+                    </div>
                     </div>
 
                     { this.state.user.id !== 1 ? <>
@@ -136,7 +138,8 @@ class SingleWorkshop extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="workshop-container3">
+                    <div className='workshop-fullcontainer'>
+                    <div className="workshop-container2">
                     <div className="des-workshop-content">
                     <h7>{e.description}</h7><br/>
                     </div></div>
@@ -164,7 +167,7 @@ class SingleWorkshop extends Component {
                         </div>
 
                     </div>
-
+                    </div>
                     { this.state.user.id !== 1 ? <>
                         </>:<>
                         <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}workshops/edit/${e.workshop_id}`)}>Edit Workshop</button>

@@ -49,7 +49,7 @@ class Profile extends Component {
     render(){
         return [
             <div className="FullContent">
-                <div>
+            <div className="in-fullcont">
                 <h3>PROFILE</h3>
                 {this.state.isUserinfo ? <><button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}profile/edit/`)}>Edit Profile</button></> : 
                 <><button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}profile/create/`)}>Create Profile</button>
@@ -143,6 +143,7 @@ class EditProfile extends React.Component {
 
     render() {
         return (
+            <div className="in-fullcont">
             <div className="container">
             <div className="jumbotron jumbotron-fluid custome-jumbo">
                 <div className="container">
@@ -282,6 +283,7 @@ class EditProfile extends React.Component {
                 </div>
             </div>
             </div>
+            </div>
         );
     }
 }
@@ -357,6 +359,7 @@ class CreateProfile extends React.Component {
 
     render() {
         return (
+            <div className="in-fullcont">
             <div className="container">
             <div className="jumbotron jumbotron-fluid custome-jumbo">
                 <div className="container">
@@ -485,6 +488,7 @@ class CreateProfile extends React.Component {
                     </button>
                 </form>
                 </div>
+            </div>
             </div>
             </div>
         );
