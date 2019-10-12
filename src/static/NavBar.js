@@ -71,85 +71,85 @@ export default class NavBar extends React.Component {
           "navbar--color": !this.state.scrolling
         })}
         >
-          <Link class="navbar-brand" to="/">ART NOTE</Link>
+          <Nav.Link class="navbar-brand" href="/">ART NOTE</Nav.Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
-                <Link class="nav-link" to="/">
+                <Nav.Link class="nav-link" href="/">
                     Home
-                  </Link>
+                  </Nav.Link>
                   
                   {this.props.user.isSignin ? <> {this.props.user.id<=2 ? <>
                     <NavDropdown title="Studios" id="basic-nav-dropdown">
                     
                         
-                        <Link class="nav-link nav-item active" to="/studios/">
+                        <Nav.Link class="nav-link nav-item active" href="/studios/">
                         List
-                        </Link>
-                        <Link class="nav-link" to="/studios/list">
+                        </Nav.Link>
+                        <Nav.Link class="nav-link" href="/studios/list">
                         Your Studio
-                        </Link>
-                        <Link class="nav-link" to="/studios/add">
+                        </Nav.Link>
+                        <Nav.Link class="nav-link" href="/studios/add">
                         Create your Studio
-                        </Link>
+                        </Nav.Link>
                         <div class="dropdown-divider"></div>
-                        <Link class=" nav-link" to="/infos/">
+                        <Nav.Link class=" nav-link" href="/infos/">
                         Info
-                        </Link>
-                        <Link class="nav-link" to="/infos/add">
+                        </Nav.Link>
+                        <Nav.Link class="nav-link" href="/infos/add">
                         Create Info
-                        </Link>
+                        </Nav.Link>
                     </NavDropdown>
 
                     <NavDropdown title="Course" id="basic-nav-dropdown">
-                      <Link class="nav-link" to="/courses/">
+                      <Nav.Link class="nav-link" href="/courses/">
                         Studio's Course
-                        </Link>
-                        <Link class="nav-link" to="/courses/add">
+                        </Nav.Link>
+                        <Nav.Link class="nav-link" href="/courses/add">
                         Create your Course
-                        </Link>
+                        </Nav.Link>
                         <div class="dropdown-divider"></div>
                         <div>
                         {this.state.workshops && this.state.workshops.map( e=>{
                           return (
                             <div>
-                              <Link class="nav-link" 
-                              // to={`/workshops/single/${e.workshop_id}`}
+                              <Nav.Link class="nav-link" 
+                              // href={`/workshops/single/${e.workshop_id}`}
                               onClick={()=>window.location.replace(`${URLF}workshops/single/${e.workshop_id}`)}
                               >
                               {e.title}
-                              </Link>
+                              </Nav.Link>
 
                               </div>
                           )
                         })}
                         </div>
                         <div class="dropdown-divider"></div>
-                        <Link class="nav-link" to="/workshops/add">
+                        <Nav.Link class="nav-link" href="/workshops/add">
                         Create Workshop
-                        </Link>
+                        </Nav.Link>
                     </NavDropdown>
                     
                     </>:<>
-                    <Link class="nav-link" to="/studios/">
+                    <Nav.Link class="nav-link" href="/studios/">
                         Studios
-                    </Link>
+                    </Nav.Link>
                     <NavDropdown title="Course" id="basic-nav-dropdown">
-                      <Link class="nav-link" to="/courses">
+                      <Nav.Link class="nav-link" href="/courses">
                         Courses & Workshop
-                        </Link>
+                        </Nav.Link>
                         
                         <div class="dropdown-divider"></div>
                         <div>
                         {this.state.workshops && this.state.workshops.map( e=>{
                           return (
                             <div>
-                              <Link class="nav-link" 
-                              // to={`/workshops/single/${e.workshop_id}`}
+                              <Nav.Link class="nav-link" 
+                              // href={`/workshops/single/${e.workshop_id}`}
                               onClick={()=>window.location.replace(`${URLF}workshops/single/${e.workshop_id}`)}
                               >
                               {e.title}
-                              </Link>
+                              </Nav.Link>
 
                               </div>
                           )
@@ -159,55 +159,55 @@ export default class NavBar extends React.Component {
                         </>}
 
                     <NavDropdown title="Events" id="basic-nav-dropdown" data-hover="dropdown" data-animations="zoomIn fadeInLeft fadeInUp fadeInRight">
-                    <Link class="nav-link" to="/events/">
+                    <Nav.Link class="nav-link" href="/events/">
                         List
-                        </Link>
-                        <Link class="nav-link" to="/events/list">
+                        </Nav.Link>
+                        <Nav.Link class="nav-link" href="/events/list">
                         Your Events
-                        </Link>
-                        <Link class="nav-link" to="/events/add">
+                        </Nav.Link>
+                        <Nav.Link class="nav-link" href="/events/add">
                         Create Events
-                        </Link>
+                        </Nav.Link>
                       </NavDropdown>
 
                       <NavDropdown title="Posts" id="basic-nav-dropdown">
-                      <Link class="nav-link" to="/Posts/">
+                      <Nav.Link class="nav-link" href="/Posts/">
                           List
-                          </Link>
-                          <Link class="nav-link" to="/posts/list">
+                          </Nav.Link>
+                          <Nav.Link class="nav-link" href="/posts/list">
                           Your Posts
-                          </Link>
-                          <Link class="nav-link" to="/posts/add">
+                          </Nav.Link>
+                          <Nav.Link class="nav-link" href="/posts/add">
                           Create Posts
-                          </Link>
+                          </Nav.Link>
                       </NavDropdown>
 
-                      <Link class="nav-link" to="/about/">
+                      <Nav.Link class="nav-link" href="/about/">
                         About
-                      </Link>
+                      </Nav.Link>
                       </> : <>
-                      <Link class="nav-link" to="/studios/">
+                      <Nav.Link class="nav-link" href="/studios/">
                       Studios
-                      </Link>
-                      <Link class="nav-link" to="/events/">
+                      </Nav.Link>
+                      <Nav.Link class="nav-link" href="/events/">
                       Events
-                      </Link>
-                      <Link class="nav-link" to="/posts/">
+                      </Nav.Link>
+                      <Nav.Link class="nav-link" href="/posts/">
                       Posts
-                      </Link>
+                      </Nav.Link>
                       </>}
                   
                 
               </Nav>
               <Nav className="mr-0">
                   {this.props.user.isSignin ? <>
-                  <Link class="nav-link" to="/profile/">
+                  <Nav.Link class="nav-link" href="/profile/">
                       Profile
-                  </Link>
-                  <Link class="nav-link" to="/logout">Logout</Link>
+                  </Nav.Link>
+                  <Nav.Link class="nav-link" href="/logout">Logout</Nav.Link>
                   </> : <>
-                      <Link class="nav-link" to="/login">Login</Link>
-                      <Link class="nav-link" to="/register">Sign Up</Link></>}
+                      <Nav.Link class="nav-link" href="/login">Login</Nav.Link>
+                      <Nav.Link class="nav-link" href="/register">Sign Up</Nav.Link></>}
               </Nav>
             </Navbar.Collapse>
           </Navbar>

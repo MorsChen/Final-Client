@@ -1,6 +1,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import { Button } from "react-bootstrap";
+import classnames from "classnames";
 
 import Moment from 'react-moment';
 import 'moment-timezone';
@@ -10,7 +11,7 @@ const URLF = process.env.REACT_APP_FRONTEND_URL
 class Posts extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {...props, isLoaded: false, isPostInfo: true};
+        this.state = {...props, isLoaded: false, isPostInfo: true, unLikePost:false};
       }
 
       componentDidMount(){
@@ -73,6 +74,7 @@ class Posts extends React.Component {
 
     delcomment = async(e) => {
         const token = this.state.user.token
+        
         const id = e
         const resp = await fetch(`${URLB}posts/comments/delete/${id}`, {
             method: "POST",
@@ -87,11 +89,32 @@ class Posts extends React.Component {
         else {return alert('something wrong')}
         }
 
+    likepost = async(e) => {
+        const id = e
+        const token = this.state.user.token
+        console.log('check tokent 77', token)
+        const resp = await fetch(`${URLB}posts/like/${id}/`, {
+            method: "POST",
+            body: '',
+            headers: new Headers ({
+                "Content-Type": "application/json",
+                "Authorization": `Token ${token}`
+                })
+            });
+        const data = await resp.json()
+        if (data.status = 200){
+            this.setState({ unLikePost: data.unLikePost,
+                isLoaded: true, }); 
+            this.getPosts()}
+        else {return alert('something wrong')}
+    }
+    
+
     render(){
         return [
             <div className="FullContent">
                 <div className="in-fullcont">
-                <h3>Post List</h3>
+                <h3 className="home-title">Post List</h3>
                 {this.state.isPostInfo ? <>
                 </>:<>
                 <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}posts/add`)}>Create Post</button>
@@ -103,27 +126,63 @@ class Posts extends React.Component {
                 {this.state.isPostInfo ? <> {this.state.isLoaded ? <> {this.state.posts && this.state.posts.map( e=>{ 
                 return (
                 <div className='body-contain'><br/>
-
-                {e.owner_id !== this.state.user.id ? <>
-                </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}posts/edit/${e.post_id}`)}>Edit Post</button>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}posts/delete/${e.post_id}`)}>Delete Post</button>
-                </>}
                 <div className="post-content">
                     <div className="header-post"><h5 className="h5-header-post">{e.owner}</h5>
                     
                     </div>
 
-                    <div className="content-post-title"><span className="h5-post-title" onClick={()=>window.location.replace(`${URLF}posts/single/${e.post_id}`)}>
-                    {e.title}</span>
-                    <p className="p-post-title"><Moment fromNow>{e.created}</Moment></p></div><br/>
+                    <div className="content-post-title">
+                        <div>
+                            <span className="h5-post-title" onClick={()=>window.location.replace(`${URLF}posts/single/${e.post_id}`)}>
+                            {e.title}</span>
+                            <p className="p-post-title"><Moment fromNow>{e.created}</Moment></p>
+                        </div>
+                        <div>
+                            {e.owner_id !== this.state.user.id ? <>
+                                </>:<>
+                                <i class="far fa-trash-alt" style={{fontSize: '1rem'}} onClick={()=> window.location.replace(`${URLF}posts/delete/${e.post_id}`)}></i>
+                                <i class="far fa-edit ml-3" style={{fontSize: '1rem'}}  onClick={()=> window.location.replace(`${URLF}posts/edit/${e.post_id}`)}></i>
+                                </>}
+                        </div>
+                        </div><br/>
 
                     <div className="content-post-body"><h7 className="h7-post-body"> {e.body}</h7></div>
 
                     <div style={{display:'flex' ,flexDirection:"row", width:'90%', justifyContent:"space-between" ,marginTop:'10px'}}>
                     <div style={{display:'flex' ,flexDirection:"row", width:'10%',textAlign: 'left', alignItems: 'center', alignContent:'center'}}>
-                        <i class="fas fa-heart" style={{color:'red'}}></i></div>
-                        <div style={{display:'flex' ,flexDirection:"row", width:'10%',textAlign: 'left', alignItems: 'center', alignContent:'center'}}>
+                        {/* {this.state.user.id === null || e.like === null ? <>
+                            <i class ="far fa-thumbs-up mr-3"
+                            style={{color:'red'}}
+                            onClick={()=>this.likepost(e.post_id)}></i>
+                        </>:<>
+                        {e.like && e.like.map(k =>{
+                            if (k !== this.state.user.id){
+                                return <i class ="far fa-thumbs-up mr-3"
+                                style={{color:'red'}}
+                                onClick={()=>this.likepost(e.post_id)}></i>
+                            }else{
+                                return <i class ="fas fa-thumbs-up mr-3"
+                                style={{color:'red'}}
+                                onClick={()=>this.likepost(e.post_id)}></i>
+                            }
+                        })}
+                        </>} */}
+                      
+                        <i 
+                        // className={classnames("far fa-heart",{"fas fa-heart": ! e.like && e.like.map(k =>{
+                        //     if (k === this.state.user.id){
+                        //         this.setState({unLikePost: true})
+                        //     }else{this.setState({unLikePost: false})}
+                        //     return  this.state.unLikePost
+                        // })}
+                        // )}  
+                        // className={classnames("far fa-thumbs-up mr-3", {"far fa-thumbs-up mr-3": !  this.state.unLikePost})}
+                        class ="far fa-thumbs-up mr-3"
+                        style={{color:'red'}}
+                        onClick={()=>this.likepost(e.post_id)}></i>
+                        <span style={{color:'#5d5d5d'}}>{e.like.length}</span>
+                        </div>
+                        <div style={{display:'flex' ,flexDirection:"row", width:'10%',textAlign: 'left', alignItems: 'center', alignContent:'center', paddingRight: '50px'}}>
                             <i class="far fa-eye mr-3" style={{color:'#5d5d5d'}}></i><span style={{color:'#5d5d5d'}}>{e.views}</span>
                     {/* <p>Updated : <Moment date={e.updated}/></p> */}
                     </div>
@@ -139,7 +198,7 @@ class Posts extends React.Component {
                                 <div className="cmt-box-header">
                                 <div className="cmt-box-author"><h9>{c.author}</h9>
                                 <p className="p-post-title" style={{fontSize:"0.7rem"}}><Moment fromNow>{e.created}</Moment></p></div>
-                                <div>{c.author_id === this.state.user.id ? <><i class="far fa-trash-alt" style={{fontSize: '0.7rem'}} onClick={()=>this.delcomment(c.comment_id)}></i></>:<></>}</div>
+                                <div>{c.author_id === this.state.user.id ? <><i class="far fa-trash-alt mr-3" style={{fontSize: '0.7rem'}} onClick={()=>this.delcomment(c.comment_id)}></i></>:<></>}</div>
                                 </div> 
                                 <div className="cmt-text-body"><h9 className='body-cmt-text'>{c.body}</h9></div>
                              
@@ -157,15 +216,17 @@ class Posts extends React.Component {
                                 onChange={e => this.handleChange(e)}
                             >
                                 <div className="cmt-input">
-                                <textarea
+                                <input
                                     type="text"
                                     name="body"
-                                    className="form-control"
+                                    className="form-control inputcmt"
                                     placeholder="Enter Body"
                                     rows="5"
                                     autoFocus 
                                     required={true}
-                                ></textarea><button type="submit" className="btn btn-primary">Comment</button></div>
+                                />
+                                {/* <button type="submit" className="btn btn-primary">Comment</button> */}
+                                </div>
                                 
                             </form>
                         </div>

@@ -56,8 +56,8 @@ class PostAdd extends React.Component {
 
     render() {
         return (
-            <div className="container">
-            <div className="jumbotron jumbotron-fluid custome-jumbo">
+            <div className="FullContent">
+            <div className="in-fullcont">
                 <div className="container">
                 <form
     
@@ -65,7 +65,7 @@ class PostAdd extends React.Component {
                     onChange={e => this.handleChange(e)}
                 >
                     <div className="form-group">
-                    <h1 style={{ textAlign: "center" }}>Create Post</h1>
+                    <h1 className="home-title" style={{ textAlign: "center" }}>Create Post</h1>
                     </div>
                     <div className="form-group">
                     <label for="exampleFormControlInput1">Title</label>

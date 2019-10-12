@@ -2,6 +2,9 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import { Button } from "react-bootstrap";
 
+import Moment from 'react-moment';
+import 'moment-timezone';
+
 const URLB = process.env.REACT_APP_BACKEND_URL
 const URLF = process.env.REACT_APP_FRONTEND_URL
 class Events extends React.Component {
@@ -38,36 +41,43 @@ class Events extends React.Component {
         return [
             <div className="FullContent">
                 <div className="in-fullcont">
-                <h3>Event List</h3>
-                
                 {this.state.isEventInfo ? <> {this.state.isLoaded ? <> {this.state.events && 
                 this.state.events.map( e=>{ 
                 return (
-                <div className='event-contain'>
+                <div className='event-contain' >
                 {e.owner_id !== this.state.user.id ? <>
                 </>:<>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/edit/${e.event_id}`)}>Edit Event</button>
-                <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/delete/${e.event_id}`)}>Delete Event</button>
+                <div className="div-button" style={{justifyContent: "space-between"}}>
+                <div>
+                    <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/edit/${e.event_id}`)}>Edit your Event</button>
+                    <button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}events/delete/${e.event_id}`)}>Delete Event</button>
+                </div>
+               </div>
                 </>}
-                
-                <p onClick={()=>window.location.replace(`${URLF}events/single/${e.event_id}`)}>
-                Event Title : {e.title}</p>
-                <img src={`${e.image_url}`} style={{width: '80vw', height: '50vh'}}/>
-                <p>Description: {e.description}</p>
-                <p>Address: {e.address}</p>
-                <p>Time Start : {e.datetimestart}</p>
-                <p>Time End : {e.datetimeend}</p>
-                <p>Views : {e.views}</p>
+                <div style={{backgroundImage: `url(${e.image_url})`, backgroundPosition:'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover',width: '100%', height: '50vh', marginBottom: "20px", display:'flex', flexDirection:'column',justifyContent: 'center'}}>
+                    <h1 className="home-title" onClick={()=>window.location.replace(`${URLF}events/single/${e.event_id}`)}>
+                    {e.title}</h1>
+                </div>
+                <div clasName="des-containner">
+                        <h5 className="home-description">{e.description}
+                        </h5>
+                    </div>
+                {/* <img src={`${e.image_url}`} style={{width: '100%', height: '50vh'}}/> */}
+                <p className="p-studio">Address: {e.address}</p>
+                <p className="p-studio">Time Start : <Moment format="MM-DD-YYY HH:MM">{e.datetimestart}</Moment> ( <Moment fromNow>{e.datetimestart}</Moment> )</p>
+                <p className="p-studio">Time End :  <Moment format="MM-DD-YYY HH:MM">{e.datetimeend}</Moment> ( <Moment fromNow>{e.datetimeend}</Moment> )</p>
+                {/* <p>Views : {e.views}</p>
                 <p>Created : {e.created}</p>
-                <p>Updated : {e.updated}</p>
+                <p>Updated : {e.updated}</p> */}
                 </div>
                 )
                 })}
                 </> : <div>Loading...</div>} </> : <></>}
+                </div>
             </div>
-            </div>
+
         ]
-    }
+}
 
 }
 

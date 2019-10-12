@@ -79,8 +79,8 @@ export default class Signup extends Component {
 
     render() {
         return (
+            <div className="FullContent">
             <div className="in-fullcont">
-            <div className="container">
 
             <div className="jumbotron jumbotron-fluid custome-jumbo">
                 <div className="container">

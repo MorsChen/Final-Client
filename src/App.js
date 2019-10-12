@@ -282,12 +282,30 @@ class Footer extends React.Component {
       <div className={classnames("footer", {
         "footer--color": !this.state.scrolling
       })}>
-          <h5 className="footer-h5" >ART NOTE</h5>
+          <div style={{display:"flex", justifyContent: "space-between", paddingLeft: "20px",paddingRight: "20px"}}>
+            <div><h5 className="footer-h5" >ART NOTE</h5></div>
+            <div><h7 className="footer-h5">craz.writer@gmail.com</h7></div>
+          </div>
         </div>
     ]
   }
 }
 
 function About() {
-  return <div className="FullContent"> ABOUT</div>;
+  return (
+    <div className="FullContent">
+        <div className="in-fullcont">
+        <h3 className="home-title">About</h3>
+        <div className="about-contain">
+            <h5 style={{color:"red"}}> This is my final project for my course at CoderSchool</h5>
+            <h7 style={{color:"#ff6600"}}>My website is about Art, Illustration, Environment, drawing and skills to help you better in Drawing.</h7>
+            <p style={{color:"#acacac"}}>This website will share with readers about the courses, training classes and events of schools and studios.</p>
+            <p style={{color:"#acacac"}}>At the same time, readers can post Blog posts and can enjoy the works posted by people.</p>
+            <p style={{color:"rgb(0, 174, 255)"}}>If you have questions or comments please contact us.</p>
+            <p style={{color:"#0062ff"}}>craz.writer@gmail.com</p>
+        </div>
+
+    </div>
+    </div>
+    );
 }

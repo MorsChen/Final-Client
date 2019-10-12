@@ -79,8 +79,8 @@ class EventAdd extends React.Component {
 
     render() {
         return (
-            <div className="container">
-            <div className="jumbotron jumbotron-fluid custome-jumbo">
+            <div className="FullContent">
+                <div className="in-fullcont">
                 <div className="container">
                 <form
     
@@ -88,7 +88,7 @@ class EventAdd extends React.Component {
                     onChange={e => this.handleChange(e)}
                 >
                     <div className="form-group">
-                    <h1 style={{ textAlign: "center" }}>Create Event</h1>
+                    <h1 className="home-title" style={{ textAlign: "center" }}>Create Event</h1>
                     </div>
                     <div className="form-group">
                     <label for="exampleFormControlInput1">Title</label>
@@ -136,7 +136,7 @@ class EventAdd extends React.Component {
                     /></div>
         
                     <div className="form-group">
-                    <label for="exampleFormControlInput1">Time Start</label>
+                    <label for="exampleFormControlInput1">Time Start </label><br/>
                     <DatePicker
                     selected={this.state.datetimestart}
                     onChange={this.handleDateStart}
@@ -145,7 +145,7 @@ class EventAdd extends React.Component {
                     /></div>
 
                     <div className="form-group">
-                    <label for="exampleFormControlInput1">Time End</label>
+                    <label for="exampleFormControlInput1">Time End </label><br/>
                     <DatePicker
                     selected={this.state.datetimeend}
                     onChange={this.handleDateEnd}

@@ -50,18 +50,24 @@ class Profile extends Component {
         return [
             <div className="FullContent">
             <div className="in-fullcont">
-                <h3>PROFILE</h3>
+                <h3 className="home-title">PROFILE</h3>
                 {this.state.isUserinfo ? <><button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}profile/edit/`)}>Edit Profile</button></> : 
                 <><button className="btn btn-primary" onClick={()=> window.location.replace(`${URLF}profile/create/`)}>Create Profile</button>
                 </>}
                 
-                {this.state.isUserinfo ? <> {this.state.isLoaded ? <> <p>User Name : {this.state.userinfo.username}</p>
-                <p>Full Name: {this.state.userinfo.firstname} {this.state.userinfo.lastname}</p>
-                <p>Birthday: {this.state.userinfo.birthday}</p>
-                <p>Email : {this.state.userinfo.email}</p>
-                <p>Phone: {this.state.userinfo.phone}</p>
-                <p>Address: {this.state.userinfo.address}, district {this.state.userinfo.state}, {this.state.userinfo.city} city</p>
-                <p>Zipcode : {this.state.userinfo.zipcode}</p> </> : <div>Loading...</div>} </> : <></>}
+                {this.state.isUserinfo ? <> {this.state.isLoaded ? <> 
+                    <div className='profile-contain'>
+                    <p className="p-studio">User Name : {this.state.userinfo.username}</p>
+                    <p className="p-studio">Full Name: {this.state.userinfo.firstname} {this.state.userinfo.lastname}</p>
+                    <p className="p-studio">Birthday: {this.state.userinfo.birthday}</p>
+                    <p className="p-studio">Email : {this.state.userinfo.email}</p>
+                    <p className="p-studio">Phone: {this.state.userinfo.phone}</p>
+                    <p className="p-studio">Address: {this.state.userinfo.address}, district {this.state.userinfo.state}, {this.state.userinfo.city} city</p>
+                    <p className="p-studio">Zipcode : {this.state.userinfo.zipcode}</p> 
+                    </div>
+                
+                
+                </> : <div>Loading...</div>} </> : <></>}
                 
                 </div>
 
@@ -143,8 +149,8 @@ class EditProfile extends React.Component {
 
     render() {
         return (
+            <div className="FullContent">
             <div className="in-fullcont">
-            <div className="container">
             <div className="jumbotron jumbotron-fluid custome-jumbo">
                 <div className="container">
                 <form
@@ -359,8 +365,8 @@ class CreateProfile extends React.Component {
 
     render() {
         return (
+            <div className="FullContent">
             <div className="in-fullcont">
-            <div className="container">
             <div className="jumbotron jumbotron-fluid custome-jumbo">
                 <div className="container">
                 <form
