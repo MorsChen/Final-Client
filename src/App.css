@@ -276,10 +276,10 @@
 .transbox {
   display: flex;
   width:100%;
-  background-color: #000000;
+  background-color: #00000070;
   border: 1px solid rgba(0, 0, 0, 0.493);
   flex-direction: column;
-  opacity: 0.7;
+  /* opacity: 0.7; */
 }
 .contact {
   margin: 5%;
@@ -342,8 +342,15 @@
   
   .dropdown-menu{
     margin-top: 0.5rem;
-    background-color: rgba(0, 0, 0, 0.171) !important;
+    background-color: rgba(19, 19, 19, 0.609) !important;
+    /* background-color: rgba(0, 0, 0, 0.171) !important; */
     border: none;
+  }
+
+  .dropdown-menu--color {
+    background-color: rgba(19, 19, 19, 0.609) !important;
+    box-shadow: rgba(122, 56, 21, 0.548) 0px 0px 11px 0px !important;
+    /* box-shadow: rgba(51, 71, 91, 0.568) 0px 10px 50px -5px !important; */
   }
 
 

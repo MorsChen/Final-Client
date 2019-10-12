@@ -74,8 +74,8 @@ export default class NavBar extends React.Component {
                   </Nav.Link>
                   
                   {this.props.user.isSignin ? <> {this.props.user.id<=2 ? <>
-                    <NavDropdown title="Studios" id="basic-nav-dropdown">
-                    
+                    <NavDropdown 
+                        title="Studios" id="basic-nav-dropdown">
                         
                         <Nav.Link class="nav-link nav-item active" href="/studios/">
                         List
