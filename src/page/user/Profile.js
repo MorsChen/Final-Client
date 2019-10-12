@@ -10,7 +10,6 @@ class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {...props, isLoaded : false, isUserinfo: true};
-        console.log("check props Profile", this.state)
       }
     componentDidMount(){
         this.getprofile()

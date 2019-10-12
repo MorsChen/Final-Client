@@ -11,7 +11,6 @@ export default class Hone extends Component {
   constructor(props) {
     super(props);
     this.state = {...props, isLoaded : false, isUserinfo: true};
-    console.log("check props home", this.props.users)
   }
   componentDidMount(){
     this.getStudios()
@@ -36,10 +35,6 @@ export default class Hone extends Component {
     }
 
   render() {
-    
-    // const u = this.state.users
-    console.log('check events in users inside homepage', this.state.users)
-    
     return (
       <div>
         {this.state.info && this.state.info.map( e=>{ 

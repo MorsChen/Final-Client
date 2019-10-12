@@ -6,7 +6,6 @@ export default class Logout extends React.Component {
     constructor(props){
         super(props)
         this.state = {...props}
-        console.log('check props', this.state)
         
     }
     
@@ -14,7 +13,6 @@ export default class Logout extends React.Component {
         this.deltoken()
     }
     deltoken = async () => {
-        console.log('check token inside', this.state.token)
         const response = await fetch(`${URLB}logout`, {
         method: 'GET',
         headers: {

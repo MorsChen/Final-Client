@@ -83,11 +83,9 @@ export default class App extends React.Component {
       }
     })
     const b = await a.json()
-    console.log('check B in 64 app', b)
     if (b.status === 200) {
       this.setState({users:b.users, isLoaded: true})
     }
-    console.log('check users', this.state.users)
   }
   
   fetchUser= async() =>{
@@ -104,7 +102,6 @@ export default class App extends React.Component {
       b.user.token = token
       this.setState({isloading:true , user:b.user})
     }
-    console.log("check user from backend", this.state.user)
   }
 
   getToken = (token) => {
@@ -113,8 +110,6 @@ export default class App extends React.Component {
   }
  
   render() {
-    console.log("check token from app", this.state.user)
-    console.log('check users', this.state.users)
     return (
       <div className="App">
         <Router>

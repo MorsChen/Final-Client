@@ -36,9 +36,10 @@ class Posts extends React.Component {
         }
     }
 
-    handleAddCmt = async (i, id) => {
-        const a = id
-        i.preventDefault();
+    handleAddCmt = async (e, i) => {
+        const id = i
+        const token = this.props.user.token
+        e.preventDefault();
         const user = this.props.user
         if (user.isSignin !== true) {
             alert("Please login");
@@ -48,8 +49,7 @@ class Posts extends React.Component {
             let newcmt = {
             body: this.state.body,
             };
-            const token = this.props.user.token
-            const response = await fetch(`${URLB}posts/${a}/comments/add/`, {
+            const response = await fetch(`${URLB}posts/${id}/comments/add/`, {
             method: "POST",
             body: JSON.stringify(newcmt),
             headers: new Headers({
@@ -74,7 +74,6 @@ class Posts extends React.Component {
 
     delcomment = async(e) => {
         const token = this.state.user.token
-        
         const id = e
         const resp = await fetch(`${URLB}posts/comments/delete/${id}`, {
             method: "POST",
@@ -92,7 +91,6 @@ class Posts extends React.Component {
     likepost = async(e) => {
         const id = e
         const token = this.state.user.token
-        console.log('check tokent 77', token)
         const resp = await fetch(`${URLB}posts/like/${id}/`, {
             method: "POST",
             body: '',
@@ -109,7 +107,6 @@ class Posts extends React.Component {
         else {return alert('something wrong')}
     }
     
-
     render(){
         return [
             <div className="FullContent">
@@ -221,7 +218,6 @@ class Posts extends React.Component {
                                     name="body"
                                     className="form-control inputcmt"
                                     placeholder="Enter Body"
-                                    rows="5"
                                     autoFocus 
                                     required={true}
                                 />

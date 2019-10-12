@@ -16,9 +16,6 @@ export default class NavBar extends React.Component {
         prevScrollpos: window.pageYOffset,
         scrolling: true,
       };
-        
-      console.log("check props navbar", this.state)
-      console.log("check props render navbar", this.state.user)
     }
 
   componentDidMount() {
@@ -61,9 +58,6 @@ export default class NavBar extends React.Component {
 
 
   render () {
-   
-    console.log("check props render navbar", this.props.user)
-    console.log("check token from navbar", this.props.user.token)
       return [
         // <Navbar scrolling dark bg="light" expand="lg" id="navbar">
         <Navbar  bg="dark" expand="lg"

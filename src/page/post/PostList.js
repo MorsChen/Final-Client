@@ -88,7 +88,6 @@ class PostList extends Component {
     likepost = async(e) => {
         const id = e
         const token = this.state.user.token
-        console.log('check tokent 77', token)
         const resp = await fetch(`${URLB}posts/like/${id}/`, {
             method: "POST",
             body: '',
@@ -276,7 +275,6 @@ class SinglePost extends Component {
     likepost = async(e) => {
         const id = e
         const token = this.state.user.token
-        console.log('check tokent 77', token)
         const resp = await fetch(`${URLB}posts/like/${id}/`, {
             method: "POST",
             body: '',
@@ -311,7 +309,6 @@ class SinglePost extends Component {
 
     render(){
         const e = this.state.post
-        console.log('check single post 101', e)
         return [
 
             <div className="FullContent">

@@ -8,8 +8,6 @@ class Info extends React.Component {
     constructor(props) {
         super(props);
         this.state = {...props, isLoaded: false, isInfoInfo: true};
-        console.log("check props Events", this.state)
-        console.log("check props user isSignin", this.state.user.isSignin)
       }
 
     componentDidMount(){
