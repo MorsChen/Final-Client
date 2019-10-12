@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import Moment from 'react-moment';
 import 'moment-timezone';
 
+/* check 1  */
 const URLB = process.env.REACT_APP_BACKEND_URL
 const URLF = process.env.REACT_APP_FRONTEND_URL
 class PostAdd extends React.Component {
