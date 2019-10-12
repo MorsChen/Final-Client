@@ -61,7 +61,7 @@ class Profile extends Component {
                     <div className='profile-contain'>
                     <p className="p-studio">User Name : {this.state.userinfo.username}</p>
                     <p className="p-studio">Full Name: {this.state.userinfo.firstname} {this.state.userinfo.lastname}</p>
-                    <p className="p-studio">Birthday: <Moment format="MM-DD-YYY HH:MM">{this.state.userinfo.birthday} </Moment></p>
+                    <p className="p-studio">Birthday: <Moment format="MM-DD-YYYY">{this.state.userinfo.birthday}</Moment></p>
                     <p className="p-studio">Email : {this.state.userinfo.email}</p>
                     <p className="p-studio">Phone: {this.state.userinfo.phone}</p>
                     <p className="p-studio">Address: {this.state.userinfo.address}, district {this.state.userinfo.state}, {this.state.userinfo.city} city</p>

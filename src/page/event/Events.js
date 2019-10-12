@@ -62,8 +62,8 @@ class Events extends React.Component {
                     </div>
                 {/* <img src={`${e.image_url}`} style={{width: '100%', height: '50vh'}}/> */}
                 <p className="p-studio">Address: {e.address}</p>
-                <p className="p-studio">Time Start : <Moment format="MM-DD-YYY HH:MM">{e.datetimestart}</Moment> ( <Moment fromNow>{e.datetimestart}</Moment> )</p>
-                <p className="p-studio">Time End :  <Moment format="MM-DD-YYY HH:MM">{e.datetimeend}</Moment> ( <Moment fromNow>{e.datetimeend}</Moment> )</p>
+                <p className="p-studio">Time Start : <Moment format="MM-DD-YYYY HH:MM">{e.datetimestart}</Moment> ( <Moment fromNow>{e.datetimestart}</Moment> )</p>
+                <p className="p-studio">Time End :  <Moment format="MM-DD-YYYY HH:MM">{e.datetimeend}</Moment> ( <Moment fromNow>{e.datetimeend}</Moment> )</p>
                 {/* <p>Views : {e.views}</p>
                 <p>Created : {e.created}</p>
                 <p>Updated : {e.updated}</p> */}
